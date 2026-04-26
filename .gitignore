@@ -17,3 +17,6 @@
 .vscode/
 .idea/
 *.swp
+
+[Bb]in/
+[Oo]bj/
