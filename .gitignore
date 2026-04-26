@@ -1,0 +1,19 @@
+# --- Papri-specific ---
+
+# Local secrets (DB password) — keep on disk, never push
+**/appsettings.Development.json
+**/appsettings.*.local.json
+**/appsettings.Production.json
+
+# User-uploaded content
+**/wwwroot/uploads/*
+!**/wwwroot/uploads/.gitkeep
+!**/wwwroot/uploads/*/
+**/wwwroot/uploads/**/*
+!**/wwwroot/uploads/**/.gitkeep
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp

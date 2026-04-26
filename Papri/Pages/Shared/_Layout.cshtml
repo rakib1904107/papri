@@ -1,0 +1,57 @@
+@{
+    var currentPath = Context.Request.Path.Value?.ToLowerInvariant() ?? "/";
+    string Active(string path) => currentPath == path.ToLowerInvariant() ? "active" : "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Papri</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="public-body">
+    <header class="public-header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+            <div class="container-fluid px-5 px-lg-4">
+                <a class="navbar-brand d-flex flex-column align-items-center text-center" asp-page="/Index">
+                    <img src="~/images/logo.png" alt="Papri" class="brand-logo" onerror="this.style.display='none'" />
+                    <span class="brand-title">Papri</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+                    <ul class="navbar-nav align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link @Active("/")" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link @Active("/about")" href="/about">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link @Active("/programs")" href="/programs">Programs</a></li>
+                        <li class="nav-item"><a class="nav-link @Active("/geographical-area")" href="/geographical-area">Geographical Area</a></li>
+                        <li class="nav-item"><a class="nav-link @Active("/notice")" href="/notice">Notice</a></li>
+                        <li class="nav-item"><a class="nav-link @Active("/media")" href="/media">Media</a></li>
+                        <li class="nav-item"><a class="nav-link @Active("/contact")" href="/contact">Contact Us</a></li>
+                        <li class="nav-item"><a class="nav-link donate-btn ms-lg-2" href="/donate">Donate</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="public-main">
+        @RenderBody()
+    </main>
+
+    <footer class="public-footer border-top mt-5 py-4 text-muted">
+        <div class="container-fluid px-3 px-lg-4 d-flex justify-content-between flex-wrap gap-2">
+            <span>&copy; @DateTime.Now.Year Papri. All rights reserved.</span>
+            <span>NGO &middot; Bangladesh</span>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

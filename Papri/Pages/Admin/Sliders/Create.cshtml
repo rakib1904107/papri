@@ -1,0 +1,40 @@
+@page "/admin/sliders/create"
+@model Papri.Pages.Admin.Sliders.CreateModel
+@{
+    ViewData["Title"] = "New Slider";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-2"></div>
+            <div class="row g-3">
+                <div class="col-12">
+                    <label asp-for="ImageFile" class="form-label">Image (jpg/png/webp, max 5 MB)</label>
+                    <input asp-for="ImageFile" type="file" accept="image/*" class="form-control" />
+                    <span asp-validation-for="ImageFile" class="text-danger small"></span>
+                </div>
+                <div class="col-md-8">
+                    <label asp-for="Item.Caption" class="form-label"></label>
+                    <input asp-for="Item.Caption" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Item.DisplayOrder" class="form-label"></label>
+                    <input asp-for="Item.DisplayOrder" type="number" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input asp-for="Item.IsActive" class="form-check-input" />
+                        <label asp-for="Item.IsActive" class="form-check-label">Active</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save</button>
+                <a href="/admin/sliders" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

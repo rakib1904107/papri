@@ -1,0 +1,26 @@
+@page "/admin/headlines/edit/{id:int}"
+@model Papri.Pages.Admin.Headlines.EditModel
+@{
+    ViewData["Title"] = "Edit Headline";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-2"></div>
+            <div class="mb-3">
+                <label asp-for="Item.Text" class="form-label"></label>
+                <textarea asp-for="Item.Text" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Item.Text" class="text-danger small"></span>
+            </div>
+            <div class="form-check mb-3">
+                <input asp-for="Item.IsActive" class="form-check-input" />
+                <label asp-for="Item.IsActive" class="form-check-label">Active</label>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Update</button>
+            <a href="/admin/headlines" class="btn btn-link">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

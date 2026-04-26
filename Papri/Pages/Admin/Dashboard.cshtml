@@ -1,0 +1,48 @@
+@page "/admin/dashboard"
+@model Papri.Pages.Admin.DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row g-3 mb-4">
+    <div class="col-12 col-md-6 col-xl-3">
+        <a class="text-decoration-none" href="/admin/headlines">
+            <div class="stat-card"><div class="stat-icon bg-primary-soft"><i class="bi bi-megaphone"></i></div><div><div class="stat-value">@Model.HeadlineCount</div><div class="stat-label">Headlines</div></div></div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <a class="text-decoration-none" href="/admin/notices">
+            <div class="stat-card"><div class="stat-icon bg-warning-soft"><i class="bi bi-bell"></i></div><div><div class="stat-value">@Model.NoticeCount</div><div class="stat-label">Notices</div></div></div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <a class="text-decoration-none" href="/admin/projects">
+            <div class="stat-card"><div class="stat-icon bg-success-soft"><i class="bi bi-kanban"></i></div><div><div class="stat-value">@Model.ProjectCount</div><div class="stat-label">Projects</div></div></div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <a class="text-decoration-none" href="/admin/news">
+            <div class="stat-card"><div class="stat-icon bg-info-soft"><i class="bi bi-newspaper"></i></div><div><div class="stat-value">@Model.NewsCount</div><div class="stat-label">News</div></div></div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <a class="text-decoration-none" href="/admin/sliders">
+            <div class="stat-card"><div class="stat-icon bg-primary-soft"><i class="bi bi-images"></i></div><div><div class="stat-value">@Model.SliderCount</div><div class="stat-label">Sliders</div></div></div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <a class="text-decoration-none" href="/admin/videos">
+            <div class="stat-card"><div class="stat-icon bg-warning-soft"><i class="bi bi-play-btn"></i></div><div><div class="stat-value">@Model.VideoCount</div><div class="stat-label">Videos</div></div></div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <a class="text-decoration-none" href="/admin/reports">
+            <div class="stat-card"><div class="stat-icon bg-success-soft"><i class="bi bi-file-earmark-text"></i></div><div><div class="stat-value">@Model.ReportCount</div><div class="stat-label">Reports</div></div></div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+        <a class="text-decoration-none" href="/admin/jobs">
+            <div class="stat-card"><div class="stat-icon bg-info-soft"><i class="bi bi-briefcase"></i></div><div><div class="stat-value">@Model.JobCount</div><div class="stat-label">Jobs</div></div></div>
+        </a>
+    </div>
+</div>

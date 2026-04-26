@@ -1,0 +1,77 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var displayName = user?.UserName ?? "papriadmin";
+    var currentPath = Context.Request.Path.Value?.ToLowerInvariant() ?? "/";
+    string Active(string prefix) => currentPath.StartsWith(prefix.ToLowerInvariant()) ? "active" : "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Papri Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body class="admin-body">
+    <div class="admin-shell">
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <span class="admin-brand-mark">P</span>
+                <div>
+                    <div class="admin-brand-title">Papri</div>
+                    <div class="admin-brand-sub">Admin Panel</div>
+                </div>
+            </div>
+            <nav class="admin-nav">
+                <a href="/admin/dashboard" class="admin-nav-item @Active("/admin/dashboard")"><i class="bi bi-speedometer2"></i> Dashboard</a>
+                <a href="/admin/headlines" class="admin-nav-item @Active("/admin/headlines")"><i class="bi bi-megaphone"></i> Headlines</a>
+                <a href="/admin/notices" class="admin-nav-item @Active("/admin/notices")"><i class="bi bi-bell"></i> Notices</a>
+                <a href="/admin/projects" class="admin-nav-item @Active("/admin/projects")"><i class="bi bi-kanban"></i> Projects</a>
+                <a href="/admin/news" class="admin-nav-item @Active("/admin/news")"><i class="bi bi-newspaper"></i> News</a>
+                <a href="/admin/sliders" class="admin-nav-item @Active("/admin/sliders")"><i class="bi bi-images"></i> Sliders</a>
+                <a href="/admin/videos" class="admin-nav-item @Active("/admin/videos")"><i class="bi bi-play-btn"></i> Videos</a>
+                <a href="/admin/reports" class="admin-nav-item @Active("/admin/reports")"><i class="bi bi-file-earmark-text"></i> Reports</a>
+                <a href="/admin/jobs" class="admin-nav-item @Active("/admin/jobs")"><i class="bi bi-briefcase"></i> Job Opportunities</a>
+            </nav>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-topbar">
+                <button class="btn btn-link admin-sidebar-toggle d-lg-none" type="button" onclick="document.body.classList.toggle('sidebar-open')">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="admin-topbar-title">@ViewData["Title"]</div>
+                <div class="dropdown ms-auto">
+                    <button class="btn btn-light dropdown-toggle d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="admin-avatar">@(displayName.Length > 0 ? displayName[0].ToString().ToUpper() : "A")</span>
+                        <span class="d-none d-sm-inline">@displayName</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/admin/profile"><i class="bi bi-person-gear me-2"></i>User Profile</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <form method="post" action="/admin/logout">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right me-2"></i>Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <section class="admin-content">
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

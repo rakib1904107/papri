@@ -1,0 +1,27 @@
+@page "/admin/reports/create"
+@model Papri.Pages.Admin.Reports.CreateModel
+@{
+    ViewData["Title"] = "New Report";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-2"></div>
+            <div class="mb-3">
+                <label asp-for="Item.Title" class="form-label"></label>
+                <input asp-for="Item.Title" class="form-control" />
+                <span asp-validation-for="Item.Title" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Upload" class="form-label">File (PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, TXT — max 25 MB)</label>
+                <input asp-for="Upload" type="file" class="form-control" />
+                <span asp-validation-for="Upload" class="text-danger small"></span>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-upload me-1"></i> Upload</button>
+            <a href="/admin/reports" class="btn btn-link">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

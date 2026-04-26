@@ -1,0 +1,67 @@
+@page "/admin/reports"
+@model Papri.Pages.Admin.Reports.IndexModel
+@{
+    ViewData["Title"] = "Reports";
+    ViewData["SearchPlaceholder"] = "Search reports...";
+    ViewData["NewButtonText"] = "New Report";
+    ViewData["NewButtonHref"] = "/admin/reports/create";
+    var currentQ = HttpContext.Request.Query["q"].ToString();
+    var currentPage = HttpContext.Request.Query["page"].ToString();
+
+    string FormatSize(long bytes)
+    {
+        if (bytes < 1024) return $"{bytes} B";
+        if (bytes < 1024 * 1024) return $"{bytes / 1024.0:0.#} KB";
+        return $"{bytes / 1024.0 / 1024.0:0.##} MB";
+    }
+}
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success py-2"><i class="bi bi-check-circle me-1"></i> @Model.StatusMessage</div>
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <partial name="_SearchBar" />
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 60px;">Id</th>
+                        <th>Title</th>
+                        <th style="width: 80px;">Type</th>
+                        <th style="width: 100px;">Size</th>
+                        <th style="width: 150px;">Uploaded</th>
+                        <th style="width: 200px;" class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Items.Any())
+                    {
+                        <tr><td colspan="6" class="text-center text-muted py-4">No reports yet.</td></tr>
+                    }
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Title</td>
+                            <td><span class="badge bg-secondary">@item.FileType</span></td>
+                            <td>@FormatSize(item.FileSizeBytes)</td>
+                            <td>@item.UploadedAt.ToString("yyyy-MM-dd")</td>
+                            <td class="text-end">
+                                <a class="btn btn-sm btn-outline-secondary" href="@item.FilePath" target="_blank"><i class="bi bi-download"></i></a>
+                                <a class="btn btn-sm btn-outline-primary" href="/admin/reports/edit/@item.Id"><i class="bi bi-pencil"></i></a>
+                                <form method="post" action="/admin/reports?handler=Delete&id=@item.Id" class="d-inline" onsubmit="return confirm('Delete this report?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <partial name="_Pagination" model="(Papri.Services.IPagedList)Model.Items" />
+    </div>
+</div>

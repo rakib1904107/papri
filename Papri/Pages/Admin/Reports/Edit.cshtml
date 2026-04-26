@@ -1,0 +1,36 @@
+@page "/admin/reports/edit/{id:int}"
+@model Papri.Pages.Admin.Reports.EditModel
+@{
+    ViewData["Title"] = "Edit Report";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-2"></div>
+            <div class="mb-3">
+                <label asp-for="Item.Title" class="form-label"></label>
+                <input asp-for="Item.Title" class="form-control" />
+                <span asp-validation-for="Item.Title" class="text-danger small"></span>
+            </div>
+            <div class="mb-3">
+                @if (!string.IsNullOrEmpty(Model.Item.FilePath))
+                {
+                    <div class="mb-2 small">
+                        Current file:
+                        <a href="@Model.Item.FilePath" target="_blank">
+                            <i class="bi bi-file-earmark-text me-1"></i>@Model.Item.FileType.ToUpper()
+                        </a>
+                    </div>
+                }
+                <label asp-for="Upload" class="form-label">Replace file (optional)</label>
+                <input asp-for="Upload" type="file" class="form-control" />
+                <span asp-validation-for="Upload" class="text-danger small"></span>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Update</button>
+            <a href="/admin/reports" class="btn btn-link">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

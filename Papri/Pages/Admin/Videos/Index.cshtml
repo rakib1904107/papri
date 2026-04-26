@@ -1,0 +1,54 @@
+@page "/admin/videos"
+@model Papri.Pages.Admin.Videos.IndexModel
+@{
+    ViewData["Title"] = "Videos";
+    ViewData["SearchPlaceholder"] = "Search videos...";
+    ViewData["NewButtonText"] = "New Video";
+    ViewData["NewButtonHref"] = "/admin/videos/create";
+}
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success py-2"><i class="bi bi-check-circle me-1"></i> @Model.StatusMessage</div>
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <partial name="_SearchBar" />
+        @if (!Model.Items.Any())
+        {
+            <p class="text-center text-muted py-4">No videos yet.</p>
+        }
+        else
+        {
+            <div class="row g-3">
+                @foreach (var item in Model.Items)
+                {
+                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                        <div class="card h-100">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube.com/embed/@item.YouTubeId"
+                                        title="@item.Title"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen
+                                        loading="lazy"></iframe>
+                            </div>
+                            <div class="card-body p-2">
+                                <div class="fw-semibold text-truncate" title="@item.Title">@item.Title</div>
+                                <div class="text-muted small">@item.YouTubeId</div>
+                                <div class="d-flex gap-1 mt-2">
+                                    <a class="btn btn-sm btn-outline-primary flex-fill" href="/admin/videos/edit/@item.Id"><i class="bi bi-pencil"></i></a>
+                                    <form method="post" action="/admin/videos?handler=Delete&id=@item.Id" class="flex-fill" onsubmit="return confirm('Delete this video?');">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-outline-danger w-100"><i class="bi bi-trash"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <partial name="_Pagination" model="(Papri.Services.IPagedList)Model.Items" />
+    </div>
+</div>

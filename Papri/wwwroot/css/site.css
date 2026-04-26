@@ -1,0 +1,79 @@
+html { font-size: 14px; position: relative; min-height: 100%; }
+@media (min-width: 768px) { html { font-size: 16px; } }
+
+body { margin-bottom: 60px; }
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus,
+.form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* ---------- Public site branding ---------- */
+.public-body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.navbar-brand.d-flex {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    display: block;
+}
+
+.brand-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1f2a44;
+    letter-spacing: 0.5px;
+    margin-top: 0.25rem;
+    line-height: 1;
+}
+
+.public-header .navbar {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+
+.public-header .nav-link {
+    font-weight: 500;
+    color: #000;
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+}
+
+.public-header .nav-link:hover {
+    color: #4f6ef7;
+}
+
+.public-header .nav-link.active {
+    color: #000;
+    font-weight: 700;
+}
+
+/* Donate button — keeps the same colour at rest, hover, focus and active */
+.public-header .donate-btn,
+.public-header .donate-btn:hover,
+.public-header .donate-btn:focus,
+.public-header .donate-btn:active,
+.public-header .donate-btn.active {
+    background-color: #ffb300;
+    color: #1f2a44 !important;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 0.45rem 1.1rem !important;
+    box-shadow: none;
+}
+
+@media (max-width: 991.98px) {
+    .public-header .navbar-nav { gap: 0.25rem; padding-top: 0.5rem; }
+    .public-header .donate-btn { display: inline-block; width: fit-content; }
+}
+
+.public-footer {
+    background: #fafbfd;
+}
