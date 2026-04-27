@@ -1,0 +1,79 @@
+@page "/media/photo-gallery"
+@model Papri.Pages.Media.PhotoGalleryModel
+@{
+    ViewData["Title"] = "Photo Gallery";
+}
+
+<section class="container-fluid px-3 px-lg-5 py-4">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h1 class="h3 mb-1">Photo Gallery</h1>
+            <p class="text-muted mb-0">Moments from our work and community.</p>
+        </div>
+    </div>
+
+    @if (!Model.Photos.Any())
+    {
+        <div class="alert alert-light border text-center">No photos available yet.</div>
+    }
+    else
+    {
+        <div class="row gx-3 gy-5">
+            @foreach (var photo in Model.Photos)
+            {
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="#" class="photo-card d-block"
+                       data-bs-toggle="modal"
+                       data-bs-target="#photoModal"
+                       data-img="@photo.ImagePath"
+                       data-caption="@(photo.Caption ?? "")">
+                        <div class="ratio ratio-4x3 bg-light rounded overflow-hidden">
+                            <img src="@photo.ImagePath"
+                                 alt="@(photo.Caption ?? "Photo")"
+                                 loading="lazy"
+                                 class="w-100 h-100" style="object-fit: cover;" />
+                        </div>
+                        @if (!string.IsNullOrWhiteSpace(photo.Caption))
+                        {
+                            <div class="small text-muted mt-1 text-truncate">@photo.Caption</div>
+                        }
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</section>
+
+<div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-dark text-white border-0">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="photoModalCaption"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center p-0">
+                <img id="photoModalImg" src="" alt="" class="img-fluid" style="max-height: 80vh; object-fit: contain;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = document.getElementById('photoModal');
+        if (!modal) return;
+        modal.addEventListener('show.bs.modal', function (event) {
+            var trigger = event.relatedTarget;
+            if (!trigger) return;
+            var src = trigger.getAttribute('data-img') || '';
+            var caption = trigger.getAttribute('data-caption') || '';
+            modal.querySelector('#photoModalImg').setAttribute('src', src);
+            modal.querySelector('#photoModalCaption').textContent = caption;
+        });
+        modal.addEventListener('hidden.bs.modal', function () {
+            modal.querySelector('#photoModalImg').setAttribute('src', '');
+        });
+    });
+</script>
+}

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body class="public-body">
+<body class="public-body d-flex flex-column min-vh-100">
     <header class="public-header">
         <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
             <div class="container-fluid px-5 px-lg-4">
@@ -29,7 +29,16 @@
                         <li class="nav-item"><a class="nav-link @Active("/programs")" href="/programs">Programs</a></li>
                         <li class="nav-item"><a class="nav-link @Active("/geographical-area")" href="/geographical-area">Geographical Area</a></li>
                         <li class="nav-item"><a class="nav-link @Active("/notice")" href="/notice">Notice</a></li>
-                        <li class="nav-item"><a class="nav-link @Active("/media")" href="/media">Media</a></li>
+                        @{
+                            var mediaActive = currentPath == "/media/photo-gallery" || currentPath == "/media/video-gallery" ? "active" : "";
+                        }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @mediaActive" href="#" id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Media</a>
+                            <ul class="dropdown-menu" aria-labelledby="mediaDropdown">
+                                <li><a class="dropdown-item @Active("/media/photo-gallery")" href="/media/photo-gallery">Photo Gallery</a></li>
+                                <li><a class="dropdown-item @Active("/media/video-gallery")" href="/media/video-gallery">Video Gallery</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link @Active("/contact")" href="/contact">Contact Us</a></li>
                         <li class="nav-item"><a class="nav-link donate-btn ms-lg-2" href="/donate">Donate</a></li>
                     </ul>
@@ -38,11 +47,11 @@
         </nav>
     </header>
 
-    <main role="main" class="public-main">
+    <main role="main" class="public-main flex-grow-1">
         @RenderBody()
     </main>
 
-    <footer class="public-footer border-top mt-5 py-4 text-muted">
+    <footer class="public-footer border-top py-4 text-muted mt-auto">
         <div class="container-fluid px-3 px-lg-4 d-flex justify-content-between flex-wrap gap-2">
             <span>&copy; @DateTime.Now.Year Papri. All rights reserved.</span>
             <span>NGO &middot; Bangladesh</span>

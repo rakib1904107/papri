@@ -2,6 +2,7 @@ html { font-size: 14px; position: relative; min-height: 100%; }
 @media (min-width: 768px) { html { font-size: 16px; } }
 
 body { margin-bottom: 60px; }
+body.public-body { margin-bottom: 0; }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus,
 .form-control:focus, .form-check-input:focus {
@@ -76,4 +77,16 @@ body { margin-bottom: 60px; }
 
 .public-footer {
     background: #fafbfd;
+}
+
+/* Open the Media dropdown on hover (desktop only) */
+@media (min-width: 992px) {
+    .public-header .nav-item.dropdown:hover > .dropdown-menu,
+    .public-header .nav-item.dropdown:focus-within > .dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+    .public-header .nav-item.dropdown > .dropdown-toggle::after {
+        vertical-align: 0.15em;
+    }
 }

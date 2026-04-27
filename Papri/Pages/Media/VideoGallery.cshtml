@@ -1,0 +1,41 @@
+@page "/media/video-gallery"
+@model Papri.Pages.Media.VideoGalleryModel
+@{
+    ViewData["Title"] = "Video Gallery";
+}
+
+<section class="container-fluid px-3 px-lg-5 py-4">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h1 class="h3 mb-1">Video Gallery</h1>
+            <p class="text-muted mb-0">Watch stories from the field.</p>
+        </div>
+    </div>
+
+    @if (!Model.Videos.Any())
+    {
+        <div class="alert alert-light border text-center">No videos available yet.</div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var video in Model.Videos)
+            {
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/@video.YouTubeId"
+                                    title="@video.Title"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen loading="lazy"></iframe>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title mb-1">@video.Title</h6>
+                            <small class="text-muted">@video.AddedAt.ToString("dd MMM yyyy")</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</section>
