@@ -1,0 +1,37 @@
+@page "/about/target-group"
+@model Papri.Pages.About.TargetGroupModel
+@{
+    ViewData["Title"] = "Target Group";
+    var items = new[] {
+        "Microfinance Guideline",
+        "Accounts Manual",
+        "Service Regulation",
+        "Anti-Bribery Policy",
+        "Child & Adult Policy",
+        "Child Safeguarding Policy",
+        "Whistleblowing Policy",
+        "Money laundering Policy",
+        "Integrity Policy"
+    };
+}
+
+<section class="container-fluid px-3 px-lg-5 py-4">
+    <div class="mb-5 pb-2 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Target Group</h1>
+        <p class="text-muted mb-0">Guidelines and policies that frame our work.</p>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4 p-md-5">
+            <ul class="list-group list-group-flush target-list">
+                @foreach (var item in items)
+                {
+                    <li class="list-group-item d-flex align-items-center">
+                        <i class="bi bi-file-earmark-text text-primary me-3 fs-5"></i>
+                        <span class="fw-medium">@item</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</section>

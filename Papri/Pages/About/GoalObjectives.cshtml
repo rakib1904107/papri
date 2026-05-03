@@ -1,0 +1,51 @@
+@page "/about/goal-objectives"
+@model Papri.Pages.About.GoalObjectivesModel
+@{
+    ViewData["Title"] = "Goal & Objectives";
+    var objectives = new[] {
+        "Target people will be equipped with proper knowledge, awareness and skill to form group and avail group-based services and family-based proper motivation so that they can struggle themselves for their existence and sustainability.",
+        "Target people will have easy access to the basic public services for their human rights so that they could survive and lead their life with dignity in the society.",
+        "Target people will obtain proper opportunities of micro-finance activities through their active participation so that they can be economically stable and socially dignified and can participate copiously as a member of the society.",
+        "Community people's participation will be ensured to mobilize the local resources to implement integrated rural development.",
+        "Distressed people will be organized and capacitated to attain sustainable socio-economic development."
+    };
+}
+
+<section class="container-fluid px-3 px-lg-5 py-4">
+    <div class="mb-5 pb-2 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Goal &amp; Objectives</h1>
+        <p class="text-muted mb-0">What we are working towards and how we get there.</p>
+    </div>
+
+    <div class="card shadow-sm border-0 goal-card mb-4">
+        <div class="card-body p-4 p-md-5">
+            <div class="d-flex align-items-center mb-3">
+                <span class="goal-icon me-3"><i class="bi bi-flag-fill"></i></span>
+                <h4 class="mb-0">Goal</h4>
+            </div>
+            <p class="text-justify mb-0">
+                PAPRI believes in everyone&rsquo;s right to stand on their own feet i.e. to enjoy self-determination and self-reliance by achieving socio-economic development and considers &lsquo;Empowerment&rsquo; of the common people a dire necessity for improving their life. Had the target people become empowered, they would be able to protect themselves from all social adversities and improve socio-economic conditions by their own initiatives and capacity building through participatory process, which also can contribute to the realization of their fundamental and social rights.
+            </p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 objectives-card">
+        <div class="card-body p-4 p-md-5">
+            <div class="d-flex align-items-center mb-4">
+                <span class="objectives-icon me-3"><i class="bi bi-list-check"></i></span>
+                <h4 class="mb-0">Objectives</h4>
+            </div>
+            <ol class="objectives-list ps-0 mb-0">
+                @{ var n = 0; }
+                @foreach (var obj in objectives)
+                {
+                    n++;
+                    <li class="d-flex align-items-start mb-3">
+                        <span class="objective-num me-3">@n</span>
+                        <span class="text-justify">@obj</span>
+                    </li>
+                }
+            </ol>
+        </div>
+    </div>
+</section>

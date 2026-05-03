@@ -1,0 +1,214 @@
+@page "/admin/feedbacks"
+@model Papri.Pages.Admin.Feedbacks.IndexModel
+@{
+    ViewData["Title"] = "Feedback";
+    ViewData["SearchPlaceholder"] = "Search feedback...";
+
+    string TabUrl(string filter)
+    {
+        var qs = new List<string> { $"filter={filter}" };
+        if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
+            qs.Add($"q={Uri.EscapeDataString(Model.SearchTerm)}");
+        return "/admin/feedbacks?" + string.Join("&", qs);
+    }
+}
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success py-2"><i class="bi bi-check-circle me-1"></i> @Model.StatusMessage</div>
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3 feedback-toolbar">
+            <ul class="nav nav-tabs feedback-tabs mb-0">
+                <li class="nav-item">
+                    <a class="nav-link @(Model.Filter == "all" ? "active" : "")" href="@TabUrl("all")">
+                        All <span class="badge bg-secondary ms-1">@Model.TotalCount</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(Model.Filter == "unread" ? "active" : "")" href="@TabUrl("unread")">
+                        Unread <span class="badge bg-primary ms-1">@Model.UnreadCount</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(Model.Filter == "read" ? "active" : "")" href="@TabUrl("read")">
+                        Read <span class="badge bg-light text-muted ms-1">@Model.ReadCount</span>
+                    </a>
+                </li>
+            </ul>
+
+            <form method="get" action="/admin/feedbacks" class="d-flex" style="max-width: 360px; flex: 1 1 240px;" role="search">
+                <input type="hidden" name="filter" value="@Model.Filter" />
+                <input type="search" name="q" value="@Model.SearchTerm" class="form-control form-control-sm me-2" placeholder="Search feedback..." />
+                <button type="submit" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+                @if (!string.IsNullOrEmpty(Model.SearchTerm))
+                {
+                    <a href="/admin/feedbacks?filter=@Model.Filter" class="btn btn-sm btn-outline-secondary ms-2" title="Clear search"><i class="bi bi-x"></i></a>
+                }
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 60px;">Id</th>
+                        <th style="width: 140px;">Submitted</th>
+                        <th style="width: 160px;">Name</th>
+                        <th style="width: 220px;">Email</th>
+                        <th>Message</th>
+                        <th style="width: 90px;">Status</th>
+                        <th style="width: 160px;" class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Items.Any())
+                    {
+                        <tr><td colspan="7" class="text-center text-muted py-4">No feedback yet.</td></tr>
+                    }
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr class="@(item.IsRead ? "" : "fw-semibold")" data-feedback-id="@item.Id">
+                            <td>@item.Id</td>
+                            <td>@item.SubmittedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@item.Name</td>
+                            <td><a href="mailto:@item.Email">@item.Email</a></td>
+                            <td>
+                                <a href="#" class="feedback-message-link text-decoration-none text-reset"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#feedbackModal"
+                                   data-id="@item.Id"
+                                   data-name="@item.Name"
+                                   data-email="@item.Email"
+                                   data-submitted="@item.SubmittedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm")"
+                                   data-message="@item.Message"
+                                   data-isread="@(item.IsRead ? "1" : "0")">
+                                    <span class="d-inline-block text-truncate" style="max-width: 360px; vertical-align: middle;" title="@item.Message">@item.Message</span>
+                                </a>
+                            </td>
+                            <td>
+                                @if (item.IsRead)
+                                {
+                                    <span class="badge bg-light text-muted feedback-status-badge">Read</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-primary feedback-status-badge">New</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <form method="post" action="/admin/feedbacks?handler=ToggleRead&id=@item.Id" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary" title="@(item.IsRead ? "Mark unread" : "Mark read")">
+                                        <i class="bi @(item.IsRead ? "bi-envelope" : "bi-envelope-open")"></i>
+                                    </button>
+                                </form>
+                                <form method="post" action="/admin/feedbacks?handler=Delete&id=@item.Id" class="d-inline" onsubmit="return confirm('Delete this feedback?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <partial name="_Pagination" model="(Papri.Services.IPagedList)Model.Items" />
+    </div>
+</div>
+
+<!-- Feedback detail modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title mb-1" id="fbModalName"></h5>
+                    <small class="text-muted">
+                        <a id="fbModalEmail" href="#" class="text-muted text-decoration-none"></a>
+                        &middot; <span id="fbModalSubmitted"></span>
+                    </small>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="fbModalMessage" class="mb-0" style="white-space: pre-wrap;"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = document.getElementById('feedbackModal');
+        if (!modal) return;
+
+        var nameEl = modal.querySelector('#fbModalName');
+        var emailEl = modal.querySelector('#fbModalEmail');
+        var submittedEl = modal.querySelector('#fbModalSubmitted');
+        var messageEl = modal.querySelector('#fbModalMessage');
+
+        function getCsrfToken() {
+            var input = document.querySelector('input[name="__RequestVerificationToken"]');
+            return input ? input.value : '';
+        }
+
+        function markRowAsRead(row) {
+            if (!row) return;
+            row.classList.remove('fw-semibold');
+            var badge = row.querySelector('.feedback-status-badge');
+            if (badge) {
+                badge.classList.remove('bg-primary');
+                badge.classList.add('bg-light', 'text-muted');
+                badge.textContent = 'Read';
+            }
+            var btn = row.querySelector('button[title="Mark read"]');
+            if (btn) {
+                btn.title = 'Mark unread';
+                var icon = btn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('bi-envelope-open');
+                    icon.classList.add('bi-envelope');
+                }
+                var form = btn.closest('form');
+                if (form) form.action = form.action;
+            }
+        }
+
+        modal.addEventListener('show.bs.modal', function (event) {
+            var trigger = event.relatedTarget;
+            if (!trigger) return;
+
+            var id = trigger.getAttribute('data-id');
+            var isRead = trigger.getAttribute('data-isread') === '1';
+
+            nameEl.textContent = trigger.getAttribute('data-name') || '';
+            var email = trigger.getAttribute('data-email') || '';
+            emailEl.textContent = email;
+            emailEl.setAttribute('href', 'mailto:' + email);
+            submittedEl.textContent = trigger.getAttribute('data-submitted') || '';
+            messageEl.textContent = trigger.getAttribute('data-message') || '';
+
+            if (!isRead && id) {
+                fetch('/admin/feedbacks?handler=MarkRead&id=' + encodeURIComponent(id), {
+                    method: 'POST',
+                    headers: {
+                        'RequestVerificationToken': getCsrfToken(),
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                }).then(function (r) {
+                    if (r.ok) {
+                        var row = document.querySelector('tr[data-feedback-id="' + id + '"]');
+                        markRowAsRead(row);
+                        trigger.setAttribute('data-isread', '1');
+                    }
+                });
+            }
+        });
+    });
+</script>
+}

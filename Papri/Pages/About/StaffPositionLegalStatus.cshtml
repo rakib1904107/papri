@@ -1,0 +1,81 @@
+@page "/about/staff-position-legal-status"
+@model Papri.Pages.About.StaffPositionLegalStatusModel
+@{
+    ViewData["Title"] = "Staff Position & Legal Status";
+}
+
+<section class="container-fluid px-3 px-lg-5 py-4">
+    <div class="mb-5 pb-2 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Staff Position &amp; Legal Status</h1>
+        <p class="text-muted mb-0">Our team and organisational registrations.</p>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 text-center staff-stat-card">
+                <div class="card-body p-4">
+                    <i class="bi bi-person-fill staff-stat-icon"></i>
+                    <h2 class="mt-3 mb-1">103</h2>
+                    <small class="text-muted text-uppercase">Male</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 text-center staff-stat-card">
+                <div class="card-body p-4">
+                    <i class="bi bi-person-heart staff-stat-icon"></i>
+                    <h2 class="mt-3 mb-1">41</h2>
+                    <small class="text-muted text-uppercase">Female</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 text-center staff-stat-card highlight">
+                <div class="card-body p-4">
+                    <i class="bi bi-people-fill staff-stat-icon"></i>
+                    <h2 class="mt-3 mb-1">144</h2>
+                    <small class="text-muted text-uppercase">Total</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="text-muted text-center small mb-5">Staff position as of December, 2018.</p>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4 p-md-5">
+            <h4 class="mb-3">Legal Status</h4>
+            <div class="table-responsive">
+                <table class="table align-middle table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 70px;">SL No</th>
+                            <th>Registration Authority</th>
+                            <th>Registration No</th>
+                            <th style="width: 140px;">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>NGO Affairs Bureau, Bangladesh</td>
+                            <td>1424</td>
+                            <td>16.09.1999</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Micro Credit Regulatory Authority, Dhaka</td>
+                            <td>00571-00090-00107, MRA: 0000110</td>
+                            <td>15.01.2008</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Social Welfare Department, Bangladesh</td>
+                            <td>N-0548</td>
+                            <td>23.06.2016</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

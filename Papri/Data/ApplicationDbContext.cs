@@ -16,6 +16,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Video> Videos => Set<Video>();
     public DbSet<Report> Reports => Set<Report>();
     public DbSet<JobOpportunity> JobOpportunities => Set<JobOpportunity>();
+    public DbSet<Feedback> Feedbacks => Set<Feedback>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -27,5 +28,6 @@ public class ApplicationDbContext : IdentityDbContext
         builder.Entity<News>().HasIndex(n => n.Date);
         builder.Entity<Slider>().HasIndex(s => s.DisplayOrder);
         builder.Entity<JobOpportunity>().HasIndex(j => j.Deadline);
+        builder.Entity<Feedback>().HasIndex(f => f.SubmittedAt);
     }
 }

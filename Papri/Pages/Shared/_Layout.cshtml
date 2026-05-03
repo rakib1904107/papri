@@ -9,15 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Papri</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="public-body d-flex flex-column min-vh-100">
     <header class="public-header">
         <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
             <div class="container-fluid px-5 px-lg-4">
-                <a class="navbar-brand d-flex flex-column align-items-center text-center" asp-page="/Index">
-                    <img src="~/images/logo.png" alt="Papri" class="brand-logo" onerror="this.style.display='none'" />
-                    <span class="brand-title">Papri</span>
+                <a class="navbar-brand d-flex align-items-center" asp-page="/Index">
+                    <img src="~/images/papri.jpg" alt="Papri" class="brand-logo" onerror="this.style.display='none'" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,34 @@
                 <div class="collapse navbar-collapse justify-content-end" id="mainNav">
                     <ul class="navbar-nav align-items-lg-center">
                         <li class="nav-item"><a class="nav-link @Active("/")" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link @Active("/about")" href="/about">About Us</a></li>
+                        @{
+                            var aboutPaths = new[] {
+                                "/about/profile", "/about/executive-director", "/about/core-values",
+                                "/about/major-areas", "/about/vission-mission", "/about/goal-objectives",
+                                "/about/target-group", "/about/staff-position-legal-status",
+                                "/about/organogram", "/about/donors-partners", "/about/experience",
+                                "/about/appreciative-story", "/about/legendary-visitors"
+                            };
+                            var aboutActive = aboutPaths.Contains(currentPath) ? "active" : "";
+                        }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @aboutActive" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                                <li><a class="dropdown-item @Active("/about/profile")" href="/about/profile">Profile</a></li>
+                                <li><a class="dropdown-item @Active("/about/executive-director")" href="/about/executive-director">Executive Director</a></li>
+                                <li><a class="dropdown-item @Active("/about/core-values")" href="/about/core-values">Core Values</a></li>
+                                <li><a class="dropdown-item @Active("/about/major-areas")" href="/about/major-areas">Major Areas</a></li>
+                                <li><a class="dropdown-item @Active("/about/vission-mission")" href="/about/vission-mission">Vission &amp; Mission</a></li>
+                                <li><a class="dropdown-item @Active("/about/goal-objectives")" href="/about/goal-objectives">Goal &amp; Objectives</a></li>
+                                <li><a class="dropdown-item @Active("/about/target-group")" href="/about/target-group">Target Group</a></li>
+                                <li><a class="dropdown-item @Active("/about/staff-position-legal-status")" href="/about/staff-position-legal-status">Staff Position &amp; Legal Status</a></li>
+                                <li><a class="dropdown-item @Active("/about/organogram")" href="/about/organogram">Organogram</a></li>
+                                <li><a class="dropdown-item @Active("/about/donors-partners")" href="/about/donors-partners">Donors/Partners</a></li>
+                                <li><a class="dropdown-item @Active("/about/experience")" href="/about/experience">Experience</a></li>
+                                <li><a class="dropdown-item @Active("/about/appreciative-story")" href="/about/appreciative-story">Appreciative Story</a></li>
+                                <li><a class="dropdown-item @Active("/about/legendary-visitors")" href="/about/legendary-visitors">Legendary Visitors</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link @Active("/programs")" href="/programs">Programs</a></li>
                         <li class="nav-item"><a class="nav-link @Active("/geographical-area")" href="/geographical-area">Geographical Area</a></li>
                         <li class="nav-item"><a class="nav-link @Active("/notice")" href="/notice">Notice</a></li>
@@ -40,6 +67,7 @@
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link @Active("/contact")" href="/contact">Contact Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://mail.papri.org" target="_blank" rel="noopener">Webmail</a></li>
                         <li class="nav-item"><a class="nav-link donate-btn ms-lg-2" href="/donate">Donate</a></li>
                     </ul>
                 </div>
@@ -51,10 +79,85 @@
         @RenderBody()
     </main>
 
-    <footer class="public-footer border-top py-4 text-muted mt-auto">
-        <div class="container-fluid px-3 px-lg-4 d-flex justify-content-between flex-wrap gap-2">
-            <span>&copy; @DateTime.Now.Year Papri. All rights reserved.</span>
-            <span>NGO &middot; Bangladesh</span>
+    <footer class="public-footer mt-auto">
+        <div class="public-footer-top">
+            <div class="container-fluid px-3 px-lg-5 py-5">
+                <div class="row g-4">
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <h5 class="footer-heading">Contact Us</h5>
+                        <p class="mb-2"><strong>PHONE:</strong> 01711533610</p>
+                        <p class="mb-2"><strong>ADDRESS:</strong> Village &amp; Post: Narayanpur, Upazila: Belabo, District- Narsingdi, Bangladesh.</p>
+                        <p class="mb-0"><strong>EMAIL:</strong> <a href="mailto:info@papri.org">info@papri.org</a></p>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <h5 class="footer-heading">Important links</h5>
+                        <ul class="list-unstyled footer-links mb-0">
+                            <li><a href="https://mra.gov.bd/" target="_blank" rel="noopener">MRA</a></li>
+                            <li><a href="https://pksf.org.bd/" target="_blank" rel="noopener">PKSF</a></li>
+                            <li><a href="https://microfin360.com/" target="_blank" rel="noopener">Microfin360</a></li>
+                            <li><a href="https://bangladesh.gov.bd/" target="_blank" rel="noopener">Government Web Portal</a></li>
+                            <li><a href="https://campebd.org/" target="_blank" rel="noopener">CAMPE</a></li>
+                            <li><a href="https://www.un.org/ecosoc/" target="_blank" rel="noopener">ECOSOC</a></li>
+                            <li><a href="https://mienit.com/" target="_blank" rel="noopener">Mien IT</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-2">
+                        <h5 class="footer-heading">Follow Us</h5>
+                        <ul class="list-unstyled footer-social mb-0">
+                            <li>
+                                <a href="https://www.facebook.com/" target="_blank" rel="noopener">
+                                    <i class="bi bi-facebook"></i><span>Facebook</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/" target="_blank" rel="noopener">
+                                    <i class="bi bi-linkedin"></i><span>LinkedIn</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/" target="_blank" rel="noopener">
+                                    <i class="bi bi-twitter-x"></i><span>Twitter</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <h5 class="footer-heading">Feedback</h5>
+                        @{
+                            var fbStatus = TempData["FeedbackStatus"] as string;
+                            var fbSuccess = TempData["FeedbackSuccess"] as bool? ?? false;
+                        }
+                        @if (!string.IsNullOrEmpty(fbStatus))
+                        {
+                            <div class="alert @(fbSuccess ? "alert-success" : "alert-danger") py-2 small mb-2">@fbStatus</div>
+                        }
+                        <form method="post" action="/feedback" class="footer-feedback-form">
+                            @Html.AntiForgeryToken()
+                            <div class="row g-2 mb-2">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" name="Name" placeholder="Name" required maxlength="100" />
+                                </div>
+                                <div class="col-6">
+                                    <input type="email" class="form-control" name="Email" placeholder="Email" required maxlength="200" />
+                                </div>
+                            </div>
+                            <textarea class="form-control mb-2" name="Message" rows="4" placeholder="Text" required></textarea>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-success btn-sm px-3">submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="public-footer-bottom text-center py-3">
+            <div class="container-fluid px-3">
+                <div>Copyright &copy; @DateTime.Now.Year, papri.org | All rights reserved.</div>
+                <div>Developed by <a href="https://mienit.com/" target="_blank" rel="noopener">MIEN IT Ltd.</a></div>
+            </div>
         </div>
     </footer>
 

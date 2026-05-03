@@ -1,0 +1,87 @@
+@page "/contact"
+@model Papri.Pages.ContactModel
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<section class="container-fluid px-3 px-lg-5 py-4">
+    <div class="mb-5 pb-2 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Contact Us</h1>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-5 contact-map-card">
+        <div class="card-body p-0">
+            <div class="ratio contact-map-ratio">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58293.55889298476!2d90.88!3d24.054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x37541f4932dbe43d%3A0x9f0f0a96c54ce683!2sPAPRI!5e0!3m2!1sen!2sbd!4v1777800656196!5m2!1sen!2sbd"
+                        style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="PAPRI location map"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-0 contact-card">
+                <div class="card-body p-4 p-md-5">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="contact-icon contact-icon-blue me-3"><i class="bi bi-person-vcard"></i></span>
+                        <h4 class="mb-0">Contact Person</h4>
+                    </div>
+                    <h5 class="mb-1">Abu Based</h5>
+                    <p class="text-muted mb-3">
+                        Executive Director, PAPRI<br />
+                        <small>Poverty Alleviation through Participatory Rural Initiatives</small>
+                    </p>
+                    <ul class="list-unstyled mb-0 contact-list">
+                        <li>
+                            <i class="bi bi-geo-alt text-primary"></i>
+                            <span>Village &amp; Post: Narayanpur, Upazila: Belabo, District: Narsingdi, Bangladesh.</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone text-primary"></i>
+                            <a href="tel:+8801711533610">01711533610</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-envelope text-primary"></i>
+                            <a href="mailto:info@papri.org">info@papri.org</a>
+                        </li>
+                        <li>
+                            <i class="bi bi-globe text-primary"></i>
+                            <a href="https://www.papri.org" target="_blank" rel="noopener">www.papri.org</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-0 contact-card">
+                <div class="card-body p-4 p-md-5">
+                    <div class="d-flex align-items-center mb-4">
+                        <span class="contact-icon contact-icon-amber me-3"><i class="bi bi-building"></i></span>
+                        <h4 class="mb-0">Organization Address</h4>
+                    </div>
+                    <div class="address-row">
+                        <div class="address-label">Head office:</div>
+                        <p class="address-body">
+                            PAPRI<br />
+                            PO. Narayanpur Upazila: Belabo,<br />
+                            District &ndash; Narsingdi,<br />
+                            Bangladesh
+                        </p>
+                    </div>
+                    <div class="address-row">
+                        <div class="address-label">Liaison office:</div>
+                        <p class="address-body">
+                            PAPRI<br />
+                            153/1, Court road, (3rd floor), Bilasdi,<br />
+                            District: Narsingdi<br />
+                            Bangladesh
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

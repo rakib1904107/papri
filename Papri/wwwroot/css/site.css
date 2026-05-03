@@ -79,6 +79,54 @@ body.public-body { margin-bottom: 0; }
     background: #fafbfd;
 }
 
+/* ---------- Public footer (4-column + bottom bar) ---------- */
+.public-footer { background: #fafbfd; padding: 0; border-top: none; color: #1f2a44; margin-top: 3.5rem !important; }
+
+.public-footer-top {
+    background: #e7dfdc;
+    color: #1f2a44;
+}
+.pt-6 { padding-top: 5rem !important; }
+@media (min-width: 992px) {
+    .pt-6 { padding-top: 6.5rem !important; }
+}
+.public-footer-top .footer-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #000;
+}
+.public-footer-top a { color: #2563eb; text-decoration: none; }
+.public-footer-top a:hover { text-decoration: underline; }
+
+.footer-links li { padding: 0.2rem 0; }
+.footer-links a { color: #2563eb; }
+
+.footer-social li { padding: 0.25rem 0; }
+.footer-social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #1f2a44;
+    text-decoration: none;
+    font-weight: 500;
+}
+.footer-social a:hover { color: #4f6ef7; text-decoration: none; }
+.footer-social i { font-size: 1.25rem; width: 24px; text-align: center; }
+
+.footer-feedback-form .form-control { border-radius: 4px; }
+.footer-feedback-form .form-control:focus {
+    border-color: #4f6ef7;
+    box-shadow: 0 0 0 0.15rem rgba(79, 110, 247, 0.2);
+}
+
+.public-footer-bottom {
+    background: #5d5b8a;
+    color: #fff;
+}
+.public-footer-bottom a { color: #80e0e8; text-decoration: none; }
+.public-footer-bottom a:hover { text-decoration: underline; }
+
 /* Open the Media dropdown on hover (desktop only) */
 @media (min-width: 992px) {
     .public-header .nav-item.dropdown:hover > .dropdown-menu,
@@ -90,3 +138,315 @@ body.public-body { margin-bottom: 0; }
         vertical-align: 0.15em;
     }
 }
+
+/* Match dropdown-item hover background/color to the active state */
+.public-header .dropdown-menu .dropdown-item:hover,
+.public-header .dropdown-menu .dropdown-item:focus {
+    background-color: var(--bs-dropdown-link-active-bg);
+    color: var(--bs-dropdown-link-active-color);
+}
+
+/* Add a small gap between dropdown items so the active and hovered items
+   don't visually merge into a single block */
+.public-header .dropdown-menu {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.public-header .dropdown-menu .dropdown-item {
+    margin: 2px 0;
+}
+
+/* ---------- Photo gallery modal navigation arrows ---------- */
+.photo-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    z-index: 5;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.photo-nav-btn:hover,
+.photo-nav-btn:focus {
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    outline: none;
+}
+
+.photo-nav-prev { left: 12px; }
+.photo-nav-next { right: 12px; }
+
+/* ---------- Executive Director page ---------- */
+.director-photo {
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    background-color: #f1f3f5;
+}
+
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.7;
+}
+
+/* ---------- About sub-pages ---------- */
+.core-value-item {
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: background-color 0.15s ease-in-out;
+}
+.core-value-item:hover {
+    background-color: #f5f8ff;
+}
+
+.major-area-card {
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.major-area-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.08) !important;
+}
+.major-area-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #eef3ff;
+    color: #4f6ef7;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.vision-card {
+    border-top: 4px solid #4f6ef7 !important;
+}
+.mission-card {
+    border-top: 4px solid #ffb300 !important;
+}
+.vision-icon, .mission-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+.vision-icon { background: #eef3ff; color: #4f6ef7; }
+.mission-icon { background: #fff5d6; color: #c98700; }
+
+.target-list .list-group-item {
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 0.85rem 0.25rem;
+}
+.target-list .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.staff-stat-card .staff-stat-icon {
+    font-size: 2.25rem;
+    color: #4f6ef7;
+}
+.staff-stat-card.highlight {
+    background: linear-gradient(180deg, #f5f8ff 0%, #ffffff 100%);
+    border: 1px solid #d9e3ff !important;
+}
+
+.organogram-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.goal-card {
+    border-top: 4px solid #4f6ef7 !important;
+}
+.objectives-card {
+    border-top: 4px solid #ffb300 !important;
+}
+.goal-icon, .objectives-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+.goal-icon { background: #eef3ff; color: #4f6ef7; }
+.objectives-icon { background: #fff5d6; color: #c98700; }
+
+.objectives-list { list-style: none; }
+.objective-num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #4f6ef7;
+    color: #fff;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+/* ---------- Geographical area page ---------- */
+.area-card {
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.area-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.08) !important;
+}
+.area-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+.area-icon-blue  { background: #eef3ff; color: #4f6ef7; }
+.area-icon-amber { background: #fff5d6; color: #c98700; }
+.area-icon-green { background: #e3f7e9; color: #198754; }
+
+/* ---------- Public page side padding (gives breathing room on wide screens) ---------- */
+@media (min-width: 768px) {
+    .public-main > section.container-fluid {
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+    }
+}
+@media (min-width: 992px) {
+    .public-main > section.container-fluid {
+        padding-left: 4rem !important;
+        padding-right: 4rem !important;
+    }
+}
+@media (min-width: 1400px) {
+    .public-main > section.container-fluid {
+        padding-left: 6rem !important;
+        padding-right: 6rem !important;
+    }
+}
+@media (min-width: 1800px) {
+    .public-main > section.container-fluid {
+        padding-left: 9rem !important;
+        padding-right: 9rem !important;
+    }
+}
+
+/* Gallery pages get lighter side padding than the rest so cards have more room */
+.public-main > section.container-fluid.gallery-page {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+@media (min-width: 768px) {
+    .public-main > section.container-fluid.gallery-page {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+@media (min-width: 992px) {
+    .public-main > section.container-fluid.gallery-page {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+}
+@media (min-width: 1400px) {
+    .public-main > section.container-fluid.gallery-page {
+        padding-left: 3rem !important;
+        padding-right: 3rem !important;
+    }
+}
+
+/* ---------- Contact Us page ---------- */
+.contact-map-ratio {
+    --bs-aspect-ratio: 38%;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+/* Map card sits narrower than the rest of the content */
+@media (min-width: 768px) {
+    .contact-map-card { margin-left: 2rem; margin-right: 2rem; }
+}
+@media (min-width: 992px) {
+    .contact-map-card { margin-left: 4rem; margin-right: 4rem; }
+}
+@media (min-width: 1400px) {
+    .contact-map-card { margin-left: 7rem; margin-right: 7rem; }
+}
+@media (min-width: 1800px) {
+    .contact-map-card { margin-left: 10rem; margin-right: 10rem; }
+}
+
+/* Head/Liaison office address rows */
+.address-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.address-row:last-child { border-bottom: none; }
+.address-row .address-label {
+    flex: 0 0 140px;
+    font-weight: 600;
+    color: #1f2a44;
+}
+.address-row .address-body {
+    flex: 1 1 auto;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.contact-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+.contact-icon-blue  { background: #eef3ff; color: #4f6ef7; }
+.contact-icon-amber { background: #fff5d6; color: #c98700; }
+
+.contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.contact-list li:last-child { border-bottom: none; }
+.contact-list li i {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    flex-shrink: 0;
+}
+.contact-list a {
+    color: inherit;
+    text-decoration: none;
+}
+.contact-list a:hover { color: #4f6ef7; }
+

@@ -1,0 +1,150 @@
+@page "/notice"
+@using Papri.Models
+@model Papri.Pages.NoticeModel
+@{
+    ViewData["Title"] = "Notices";
+
+    string PageUrl(int p)
+    {
+        var qs = new List<string> { $"page={p}" };
+        if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
+            qs.Add($"q={Uri.EscapeDataString(Model.SearchTerm)}");
+        return "/notice?" + string.Join("&", qs);
+    }
+}
+
+<section class="container-fluid px-3 px-lg-5 py-4">
+    <div class="mb-4 text-center">
+        <h1 class="h3 mb-1">Notices &amp; Announcements</h1>
+        <p class="text-muted mb-0">Latest news and upcoming events from Papri.</p>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <form method="get" action="/notice" class="row g-2 align-items-center mb-3">
+                <div class="col-12 col-md-6 col-lg-4 ms-md-auto">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                        <input type="text" name="q" value="@Model.SearchTerm"
+                               class="form-control" placeholder="Search notices..." />
+                        @if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
+                        {
+                            <a href="/notice" class="btn btn-outline-secondary"
+                               title="Clear search"><i class="bi bi-x-lg"></i></a>
+                        }
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table align-middle table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 70px;">SI</th>
+                            <th>Notice Title</th>
+                            <th style="width: 160px;">Publish Date</th>
+                            <th style="width: 140px;" class="text-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!Model.Items.Any())
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center text-muted py-4">
+                                    @if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
+                                    {
+                                        <text>No notices match "@Model.SearchTerm".</text>
+                                    }
+                                    else
+                                    {
+                                        <text>No notices to show.</text>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            var startSi = (Model.Items.PageIndex - 1) * Model.Items.PageSize;
+                            var index = 0;
+                            foreach (var item in Model.Items)
+                            {
+                                index++;
+                                var modalId = $"noticeModal{item.Id}";
+                                <tr>
+                                    <td>@(startSi + index)</td>
+                                    <td><span class="fw-semibold">@item.Title</span></td>
+                                    <td>@item.Date.ToString("dd MMM yyyy")</td>
+                                    <td class="text-end">
+                                        <button type="button" class="btn btn-sm btn-outline-primary"
+                                                data-bs-toggle="modal" data-bs-target="#@modalId">
+                                            <i class="bi bi-book me-1"></i>Read more
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- modal rendered outside table to avoid invalid nesting issues -->
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (Model.Items.TotalPages > 1)
+            {
+                <nav class="mt-3" aria-label="Notice pagination">
+                    <ul class="pagination justify-content-end mb-0">
+                        <li class="page-item @(Model.Items.HasPrevious ? "" : "disabled")">
+                            <a class="page-link" href="@PageUrl(Model.Items.PageIndex - 1)" aria-label="Previous">
+                                <i class="bi bi-chevron-left"></i>
+                            </a>
+                        </li>
+                        @for (var p = 1; p <= Model.Items.TotalPages; p++)
+                        {
+                            <li class="page-item @(p == Model.Items.PageIndex ? "active" : "")">
+                                <a class="page-link" href="@PageUrl(p)">@p</a>
+                            </li>
+                        }
+                        <li class="page-item @(Model.Items.HasNext ? "" : "disabled")">
+                            <a class="page-link" href="@PageUrl(Model.Items.PageIndex + 1)" aria-label="Next">
+                                <i class="bi bi-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            }
+        </div>
+    </div>
+</section>
+
+@foreach (var item in Model.Items)
+{
+    var modalId = $"noticeModal{item.Id}";
+
+    <div class="modal fade" id="@modalId" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header position-relative pe-5">
+                    <div>
+                        <h5 class="modal-title mb-1">@item.Title</h5>
+                        <small class="text-muted">
+                            <i class="bi bi-calendar3 me-1"></i>@item.Date.ToString("dd MMMM yyyy")
+                        </small>
+                    </div>
+                    <button type="button" class="btn-close position-absolute end-0 top-0 m-3"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @if (string.IsNullOrWhiteSpace(item.Body))
+                    {
+                        <p class="text-muted mb-0">No additional details provided.</p>
+                    }
+                    else
+                    {
+                        <p class="mb-0" style="white-space: pre-wrap;">@item.Body</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

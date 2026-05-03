@@ -253,3 +253,33 @@
         left: 0;
     }
 }
+
+/* ---------- Feedback admin page ---------- */
+.feedback-tabs {
+    border-bottom: 1px solid #e3e6f0;
+}
+.feedback-tabs .nav-link {
+    color: #5a6c8c;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    padding: 0.6rem 1rem;
+    font-weight: 500;
+}
+.feedback-tabs .nav-link:hover {
+    color: #4f6ef7;
+    border-color: transparent;
+    background: none;
+}
+.feedback-tabs .nav-link.active {
+    color: #4f6ef7;
+    background: none;
+    border-bottom: 2px solid #4f6ef7;
+    font-weight: 600;
+}
+.feedback-tabs .badge { font-size: 0.7rem; }
+
+.feedback-message-link:hover span {
+    color: #4f6ef7;
+    text-decoration: underline;
+}

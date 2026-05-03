@@ -1,0 +1,85 @@
+@page "/geographical-area"
+@model Papri.Pages.GeographicalAreaModel
+@{
+    ViewData["Title"] = "Geographical Area";
+
+    var districts = new[] { "Narsingdi", "Mymensingh" };
+    var upazilas = new[] { "Monohordi", "Belabo", "Shibpur", "Raipura", "Narsingdi Sadar", "Polash", "Ishwargonj" };
+    var pawrosovas = new[] { "Narsingdi Pawrosova", "Raipur Pawrosova", "Polash Pawrosova", "Monohordi Pawrosova", "Shibpur Pawrosova" };
+}
+
+<section class="container-fluid px-3 px-lg-5 py-4">
+    <div class="mb-4 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Geographical Area</h1>
+        <p class="text-muted mb-0">Where PAPRI works across Bangladesh.</p>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4 p-md-5">
+            <p class="text-justify mb-3">
+                PAPRI has commitment to work any where of Bangladesh. It gives priority geographically char area (isolated land, scattered and separated from main land and surrounded by rivers), Haor area and coastal belt and revering area. On the basis of poverty &ndash; PAPRI gives priority which is in under poverty line. It also gives the priority geographical area where live special community likes sweeper, fishermen, weaver and so on. PAPRI always choices to select working area where people are less served and vulnerable. It is depended upon people&rsquo;s need and availability of financial and technical support.
+            </p>
+            <p class="text-justify mb-0">At present it is working following geographical area:</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 area-card">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="area-icon area-icon-blue me-3"><i class="bi bi-geo-alt-fill"></i></span>
+                        <h5 class="mb-0">Districts</h5>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var d in districts)
+                        {
+                            <li class="d-flex align-items-center mb-2">
+                                <i class="bi bi-dot text-primary fs-4"></i>
+                                <span>@d district</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 area-card">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="area-icon area-icon-amber me-3"><i class="bi bi-map-fill"></i></span>
+                        <h5 class="mb-0">Upazilas</h5>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var u in upazilas)
+                        {
+                            <li class="d-flex align-items-center mb-2">
+                                <i class="bi bi-dot text-warning fs-4"></i>
+                                <span>@u</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 area-card">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="area-icon area-icon-green me-3"><i class="bi bi-buildings"></i></span>
+                        <h5 class="mb-0">Pawrosovas</h5>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var p in pawrosovas)
+                        {
+                            <li class="d-flex align-items-center mb-2">
+                                <i class="bi bi-dot text-success fs-4"></i>
+                                <span>@p</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

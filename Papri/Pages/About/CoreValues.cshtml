@@ -1,0 +1,45 @@
+@page "/about/core-values"
+@model Papri.Pages.About.CoreValuesModel
+@{
+    ViewData["Title"] = "Core Values";
+    var values = new[] {
+        "Cooperation",
+        "Cohesion and Team working",
+        "Solidarity",
+        "Transparency",
+        "Accountability",
+        "Participation",
+        "Credibility",
+        "Equality and equity",
+        "Innovation",
+        "Dynamism",
+        "Professionalism",
+        "Secular and democratic environment",
+        "Gender responsive",
+        "Disable friendly"
+    };
+}
+
+<section class="container-fluid px-3 px-lg-5 py-4">
+    <div class="mb-5 pb-2 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Core Values</h1>
+        <p class="text-muted mb-0">The principles that guide everything we do at PAPRI.</p>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4 p-md-5">
+            <p class="mb-4">PAPRI is a value driven organization having with the following core values:</p>
+            <div class="row g-3">
+                @foreach (var v in values)
+                {
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="d-flex align-items-start core-value-item">
+                            <i class="bi bi-check2-circle text-primary me-2 fs-5"></i>
+                            <span class="fw-medium">@v</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
