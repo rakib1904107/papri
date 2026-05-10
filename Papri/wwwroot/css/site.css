@@ -330,26 +330,26 @@ body.public-body { margin-bottom: 0; }
 /* ---------- Public page side padding (gives breathing room on wide screens) ---------- */
 @media (min-width: 768px) {
     .public-main > section.container-fluid {
-        padding-left: 2.5rem !important;
-        padding-right: 2.5rem !important;
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
     }
 }
 @media (min-width: 992px) {
     .public-main > section.container-fluid {
-        padding-left: 4rem !important;
-        padding-right: 4rem !important;
+        padding-left: 1.75rem !important;
+        padding-right: 1.75rem !important;
     }
 }
 @media (min-width: 1400px) {
     .public-main > section.container-fluid {
-        padding-left: 6rem !important;
-        padding-right: 6rem !important;
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
     }
 }
 @media (min-width: 1800px) {
     .public-main > section.container-fluid {
-        padding-left: 9rem !important;
-        padding-right: 9rem !important;
+        padding-left: 3.5rem !important;
+        padding-right: 3.5rem !important;
     }
 }
 
@@ -375,6 +375,24 @@ body.public-body { margin-bottom: 0; }
         padding-left: 3rem !important;
         padding-right: 3rem !important;
     }
+}
+
+/* ---------- Appreciative Story page ---------- */
+.appreciative-story-card {
+    overflow: hidden;
+}
+.appreciative-story-header {
+    background: #cfe9ee;
+    border-bottom: 1px solid #b6dde4;
+}
+.appreciative-story-image {
+    width: 100%;
+    object-fit: cover;
+}
+.appreciative-story-text {
+    white-space: pre-line;
+    line-height: 1.65;
+    color: #1f2a44;
 }
 
 /* ---------- Contact Us page ---------- */

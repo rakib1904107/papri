@@ -1,0 +1,49 @@
+@page "/admin/experiences/edit/{id:int}"
+@model Papri.Pages.Admin.Experiences.EditModel
+@{
+    ViewData["Title"] = "Edit Experience";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-2"></div>
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <label asp-for="Item.ProjectName" class="form-label"></label>
+                    <input asp-for="Item.ProjectName" class="form-control" />
+                    <span asp-validation-for="Item.ProjectName" class="text-danger small"></span>
+                </div>
+                <div class="col-md-8">
+                    <label asp-for="Item.DonorPartner" class="form-label"></label>
+                    <input asp-for="Item.DonorPartner" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Item.Duration" class="form-label"></label>
+                    <input asp-for="Item.Duration" class="form-control" />
+                </div>
+                <div class="col-md-12">
+                    <label asp-for="Item.Activities" class="form-label"></label>
+                    <textarea asp-for="Item.Activities" class="form-control" rows="8"></textarea>
+                    <div class="form-text">Enter one activity per line. Empty lines are ignored.</div>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Item.DisplayOrder" class="form-label"></label>
+                    <input asp-for="Item.DisplayOrder" type="number" class="form-control" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <div class="form-check">
+                        <input asp-for="Item.IsActive" class="form-check-input" />
+                        <label asp-for="Item.IsActive" class="form-check-label">Active</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Update</button>
+                <a href="/admin/experiences" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

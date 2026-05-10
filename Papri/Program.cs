@@ -45,6 +45,30 @@ builder.Services.AddScoped<FileUploadService>();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    var seedEmail = builder.Configuration["AdminSeed:Email"];
+    var seedPwd = builder.Configuration["AdminSeed:Password"];
+
+    if (!string.IsNullOrEmpty(seedEmail) && !string.IsNullOrEmpty(seedPwd)
+        && await userMgr.FindByEmailAsync(seedEmail) is null)
+    {
+        var admin = new IdentityUser { UserName = seedEmail, Email = seedEmail, EmailConfirmed = true };
+        var result = await userMgr.CreateAsync(admin, seedPwd);
+        if (!result.Succeeded)
+        {
+            var errors = string.Join("; ", result.Errors.Select(e => e.Description));
+            app.Logger.LogError("Admin seed failed: {Errors}", errors);
+        }
+        else
+        {
+            app.Logger.LogInformation("Seeded admin user {Email}", seedEmail);
+        }
+    }
+
+}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");

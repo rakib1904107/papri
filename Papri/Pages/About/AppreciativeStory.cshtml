@@ -1,0 +1,49 @@
+@page "/about/appreciative-story"
+@model Papri.Pages.About.AppreciativeStoryModel
+@{
+    ViewData["Title"] = "Appreciative Story";
+}
+
+<section class="container-fluid px-3 px-lg-3 py-4">
+    <div class="mb-5 pb-2 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Appreciative Story</h1>
+        <p class="text-muted mb-0">Stories from people whose lives PAPRI has touched.</p>
+    </div>
+
+    @if (Model.Items.Count == 0)
+    {
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center text-muted py-5">No appreciative stories yet.</div>
+        </div>
+    }
+    else
+    {
+        @foreach (var story in Model.Items)
+        {
+            <div class="card shadow-sm border-0 mb-4 appreciative-story-card">
+                <div class="appreciative-story-header px-4 py-3">
+                    <h2 class="h6 mb-0 fw-bold">@story.Name</h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-4 align-items-start">
+                        @if (!string.IsNullOrWhiteSpace(story.ImagePath))
+                        {
+                            <div class="col-12 col-md-4">
+                                <img src="@story.ImagePath" alt="@story.Name" class="img-fluid rounded appreciative-story-image" />
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <div class="appreciative-story-text">@story.Story</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                <div class="appreciative-story-text">@story.Story</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</section>

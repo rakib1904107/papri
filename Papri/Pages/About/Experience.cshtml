@@ -1,0 +1,76 @@
+@page "/about/experience"
+@model Papri.Pages.About.ExperienceModel
+@{
+    ViewData["Title"] = "Experience";
+}
+
+<section class="container-fluid px-3 px-lg-3 py-4">
+    <div class="mb-5 pb-2 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Experience of PAPRI</h1>
+        <p class="text-muted mb-0">Major projects implemented through donor support, partnerships and own funds.</p>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-3 p-md-4">
+            <p class="mb-0">
+                PAPRI has implemented many development projects with donor support and through
+                partnerships. It has also carried out a wide range of activities with its own
+                fund, networking and joint ventures with the government and individuals. Only
+                the major project experiences are shown below.
+            </p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-3 p-md-4">
+            @if (Model.Items.Count == 0)
+            {
+                <p class="text-muted text-center mb-0 py-4">No experience records yet.</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle experience-table mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" style="width: 4rem;">#</th>
+                                <th scope="col" style="min-width: 18rem;">Project</th>
+                                <th scope="col" style="min-width: 14rem;">Donor / Partner</th>
+                                <th scope="col" style="min-width: 10rem;">Duration</th>
+                                <th scope="col" style="min-width: 22rem;">Activities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.Items.Count; i++)
+                            {
+                                var p = Model.Items[i];
+                                var activities = p.ActivityList().ToList();
+                                <tr>
+                                    <td class="fw-semibold text-muted">@(i + 1)</td>
+                                    <td class="fw-medium">@p.ProjectName</td>
+                                    <td>@(string.IsNullOrWhiteSpace(p.DonorPartner) ? "—" : p.DonorPartner)</td>
+                                    <td>@(string.IsNullOrWhiteSpace(p.Duration) ? "—" : p.Duration)</td>
+                                    <td>
+                                        @if (activities.Count == 0)
+                                        {
+                                            <span class="text-muted">—</span>
+                                        }
+                                        else
+                                        {
+                                            <ol class="mb-0 ps-3">
+                                                @foreach (var act in activities)
+                                                {
+                                                    <li>@act</li>
+                                                }
+                                            </ol>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</section>

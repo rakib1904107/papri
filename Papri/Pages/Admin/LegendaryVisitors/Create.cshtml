@@ -1,0 +1,48 @@
+@page "/admin/legendary-visitors/create"
+@model Papri.Pages.Admin.LegendaryVisitors.CreateModel
+@{
+    ViewData["Title"] = "New Legendary Visitor";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-2"></div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="Item.Name" class="form-label"></label>
+                    <input asp-for="Item.Name" class="form-control" placeholder="e.g. Mr. Razi uddin Ahamad" />
+                    <span asp-validation-for="Item.Name" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Item.Designation" class="form-label"></label>
+                    <input asp-for="Item.Designation" class="form-control" placeholder="e.g. Minister, Member of Parliament" />
+                </div>
+                <div class="col-md-8">
+                    <label asp-for="Item.CountryInstitution" class="form-label"></label>
+                    <input asp-for="Item.CountryInstitution" class="form-control" placeholder="e.g. Bangladesh Jatya Sangshad" />
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Item.Year" class="form-label"></label>
+                    <input asp-for="Item.Year" class="form-control" placeholder="e.g. 2009 & 2011 or 2009, 2011, 2012" />
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Item.DisplayOrder" class="form-label"></label>
+                    <input asp-for="Item.DisplayOrder" type="number" class="form-control" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <div class="form-check">
+                        <input asp-for="Item.IsActive" class="form-check-input" />
+                        <label asp-for="Item.IsActive" class="form-check-label">Active</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save</button>
+                <a href="/admin/legendary-visitors" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

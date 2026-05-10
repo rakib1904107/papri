@@ -1,0 +1,85 @@
+@page "/admin/experiences"
+@model Papri.Pages.Admin.Experiences.IndexModel
+@{
+    ViewData["Title"] = "Experience";
+    ViewData["SearchPlaceholder"] = "Search projects or donors...";
+    ViewData["NewButtonText"] = "New Experience";
+    ViewData["NewButtonHref"] = "/admin/experiences/create";
+}
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success py-2"><i class="bi bi-check-circle me-1"></i> @Model.StatusMessage</div>
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <partial name="_SearchBar" />
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 70px;">Id</th>
+                        <th style="min-width: 14rem;">Project</th>
+                        <th style="min-width: 12rem;">Donor / Partner</th>
+                        <th style="width: 11rem;">Duration</th>
+                        <th style="min-width: 18rem;">Activities</th>
+                        <th style="width: 80px;">Order</th>
+                        <th style="width: 100px;">Status</th>
+                        <th style="width: 160px;" class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Items.Any())
+                    {
+                        <tr><td colspan="8" class="text-center text-muted py-4">No experience records yet.</td></tr>
+                    }
+                    @foreach (var item in Model.Items)
+                    {
+                        var activities = item.ActivityList().ToList();
+                        <tr>
+                            <td>@item.Id</td>
+                            <td class="fw-medium">@item.ProjectName</td>
+                            <td>@(string.IsNullOrWhiteSpace(item.DonorPartner) ? "—" : item.DonorPartner)</td>
+                            <td>@(string.IsNullOrWhiteSpace(item.Duration) ? "—" : item.Duration)</td>
+                            <td>
+                                @if (activities.Count == 0)
+                                {
+                                    <span class="text-muted">—</span>
+                                }
+                                else
+                                {
+                                    <ol class="mb-0 ps-3 small">
+                                        @foreach (var act in activities)
+                                        {
+                                            <li>@act</li>
+                                        }
+                                    </ol>
+                                }
+                            </td>
+                            <td>@item.DisplayOrder</td>
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <span class="badge bg-success-soft text-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Inactive</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a class="btn btn-sm btn-outline-primary" href="/admin/experiences/edit/@item.Id"><i class="bi bi-pencil"></i></a>
+                                <form method="post" action="/admin/experiences?handler=Delete&id=@item.Id" class="d-inline" onsubmit="return confirm('Delete this experience?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <partial name="_Pagination" model="(Papri.Services.IPagedList)Model.Items" />
+    </div>
+</div>

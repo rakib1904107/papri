@@ -17,6 +17,10 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Report> Reports => Set<Report>();
     public DbSet<JobOpportunity> JobOpportunities => Set<JobOpportunity>();
     public DbSet<Feedback> Feedbacks => Set<Feedback>();
+    public DbSet<DonorPartner> DonorPartners => Set<DonorPartner>();
+    public DbSet<Experience> Experiences => Set<Experience>();
+    public DbSet<AppreciativeStory> AppreciativeStories => Set<AppreciativeStory>();
+    public DbSet<LegendaryVisitor> LegendaryVisitors => Set<LegendaryVisitor>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -29,5 +33,9 @@ public class ApplicationDbContext : IdentityDbContext
         builder.Entity<Slider>().HasIndex(s => s.DisplayOrder);
         builder.Entity<JobOpportunity>().HasIndex(j => j.Deadline);
         builder.Entity<Feedback>().HasIndex(f => f.SubmittedAt);
+        builder.Entity<DonorPartner>().HasIndex(d => new { d.Category, d.DisplayOrder });
+        builder.Entity<Experience>().HasIndex(e => e.DisplayOrder);
+        builder.Entity<AppreciativeStory>().HasIndex(s => s.DisplayOrder);
+        builder.Entity<LegendaryVisitor>().HasIndex(v => v.DisplayOrder);
     }
 }

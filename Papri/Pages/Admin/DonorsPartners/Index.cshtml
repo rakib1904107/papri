@@ -1,0 +1,83 @@
+@page "/admin/donors-partners"
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model Papri.Pages.Admin.DonorsPartners.IndexModel
+@{
+    ViewData["Title"] = "Donors / Partners";
+    ViewData["SearchPlaceholder"] = "Search donors / partners...";
+    ViewData["NewButtonText"] = "New Donor / Partner";
+    ViewData["NewButtonHref"] = "/admin/donors-partners/create";
+
+    string CategoryLabel(DonorPartnerCategory c) => c switch
+    {
+        DonorPartnerCategory.Ongoing  => "Ongoing",
+        DonorPartnerCategory.Previous => "Previous",
+        DonorPartnerCategory.Network  => "Network",
+        _ => c.ToString()
+    };
+
+    string CategoryClass(DonorPartnerCategory c) => c switch
+    {
+        DonorPartnerCategory.Ongoing  => "bg-success-soft text-success",
+        DonorPartnerCategory.Previous => "bg-secondary",
+        DonorPartnerCategory.Network  => "bg-info-soft text-primary",
+        _ => "bg-light"
+    };
+}
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success py-2"><i class="bi bi-check-circle me-1"></i> @Model.StatusMessage</div>
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <partial name="_SearchBar" />
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 70px;">Id</th>
+                        <th>Name</th>
+                        <th style="width: 140px;">Category</th>
+                        <th style="width: 80px;">Order</th>
+                        <th style="width: 100px;">Status</th>
+                        <th style="width: 160px;" class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Items.Any())
+                    {
+                        <tr><td colspan="6" class="text-center text-muted py-4">No donors / partners yet.</td></tr>
+                    }
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td><span class="badge @CategoryClass(item.Category)">@CategoryLabel(item.Category)</span></td>
+                            <td>@item.DisplayOrder</td>
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <span class="badge bg-success-soft text-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Inactive</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a class="btn btn-sm btn-outline-primary" href="/admin/donors-partners/edit/@item.Id"><i class="bi bi-pencil"></i></a>
+                                <form method="post" action="/admin/donors-partners?handler=Delete&id=@item.Id" class="d-inline" onsubmit="return confirm('Delete this entry?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <partial name="_Pagination" model="(Papri.Services.IPagedList)Model.Items" />
+    </div>
+</div>

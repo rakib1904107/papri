@@ -1,0 +1,47 @@
+@page "/admin/appreciative-stories/create"
+@model Papri.Pages.Admin.AppreciativeStories.CreateModel
+@{
+    ViewData["Title"] = "New Appreciative Story";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-2"></div>
+            <div class="row g-3">
+                <div class="col-md-8">
+                    <label asp-for="Item.Name" class="form-label"></label>
+                    <input asp-for="Item.Name" class="form-control" placeholder="e.g. Happy Jahanara" />
+                    <span asp-validation-for="Item.Name" class="text-danger small"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="Item.DisplayOrder" class="form-label"></label>
+                    <input asp-for="Item.DisplayOrder" type="number" class="form-control" />
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <div class="form-check">
+                        <input asp-for="Item.IsActive" class="form-check-input" />
+                        <label asp-for="Item.IsActive" class="form-check-label">Active</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label asp-for="ImageFile" class="form-label">Image (jpg/png/webp, max 5 MB)</label>
+                    <input asp-for="ImageFile" type="file" accept="image/*" class="form-control" />
+                    <span asp-validation-for="ImageFile" class="text-danger small"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="Item.Story" class="form-label"></label>
+                    <textarea asp-for="Item.Story" class="form-control" rows="10" placeholder="Write the story. Use blank lines for paragraph breaks."></textarea>
+                    <span asp-validation-for="Item.Story" class="text-danger small"></span>
+                    <div class="form-text">Line breaks are preserved on the public page.</div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save</button>
+                <a href="/admin/appreciative-stories" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
