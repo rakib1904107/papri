@@ -1,0 +1,90 @@
+@page "/admin/programs"
+@model Papri.Pages.Admin.Programs.IndexModel
+@{
+    ViewData["Title"] = "Programs";
+    ViewData["SearchPlaceholder"] = "Search programs...";
+    ViewData["NewButtonText"] = "New Program";
+    ViewData["NewButtonHref"] = "/admin/programs/create";
+}
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success py-2"><i class="bi bi-check-circle me-1"></i> @Model.StatusMessage</div>
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <partial name="_SearchBar" />
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 70px;">Id</th>
+                        <th style="width: 90px;">Image</th>
+                        <th style="min-width: 14rem;">Title</th>
+                        <th style="min-width: 11rem;">Donors / Partner</th>
+                        <th style="width: 9rem;">Duration</th>
+                        <th style="width: 100px;">Type</th>
+                        <th style="width: 80px;">Order</th>
+                        <th style="width: 100px;">Status</th>
+                        <th style="width: 160px;" class="text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Items.Any())
+                    {
+                        <tr><td colspan="9" class="text-center text-muted py-4">No programs yet.</td></tr>
+                    }
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>
+                                @if (!string.IsNullOrWhiteSpace(item.ImagePath))
+                                {
+                                    <img src="@item.ImagePath" alt="@item.Title" style="width: 64px; height: 48px; object-fit: cover; border-radius: 4px;" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted small">—</span>
+                                }
+                            </td>
+                            <td class="fw-medium">@item.Title</td>
+                            <td>@(string.IsNullOrWhiteSpace(item.DonorsPartner) ? "—" : item.DonorsPartner)</td>
+                            <td>@(string.IsNullOrWhiteSpace(item.Duration) ? "—" : item.Duration)</td>
+                            <td>
+                                @if (item.Type == ProgramType.Ongoing)
+                                {
+                                    <span class="badge bg-success-soft text-success">Ongoing</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Previous</span>
+                                }
+                            </td>
+                            <td>@item.DisplayOrder</td>
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <span class="badge bg-success-soft text-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Inactive</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a class="btn btn-sm btn-outline-primary" href="/admin/programs/edit/@item.Id"><i class="bi bi-pencil"></i></a>
+                                <form method="post" action="/admin/programs?handler=Delete&id=@item.Id" class="d-inline" onsubmit="return confirm('Delete this program?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <partial name="_Pagination" model="(Papri.Services.IPagedList)Model.Items" />
+    </div>
+</div>

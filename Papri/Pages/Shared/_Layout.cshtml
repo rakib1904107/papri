@@ -53,7 +53,24 @@
                                 <li><a class="dropdown-item @Active("/about/legendary-visitors")" href="/about/legendary-visitors">Legendary Visitors</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link @Active("/programs")" href="/programs">Programs</a></li>
+                        @{
+                            var programsActive = currentPath == "/programs/previous" ||
+                                                 currentPath == "/programs/ongoing" ||
+                                                 currentPath == "/programs/training" ||
+                                                 (currentPath.StartsWith("/programs/") &&
+                                                  currentPath != "/programs/previous" &&
+                                                  currentPath != "/programs/ongoing" &&
+                                                  currentPath != "/programs/training")
+                                                 ? "active" : "";
+                        }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @programsActive" href="#" id="programsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Programs</a>
+                            <ul class="dropdown-menu" aria-labelledby="programsDropdown">
+                                <li><a class="dropdown-item @Active("/programs/previous")" href="/programs/previous">Previous Programs / Projects</a></li>
+                                <li><a class="dropdown-item @Active("/programs/ongoing")" href="/programs/ongoing">Ongoing Programs / Projects</a></li>
+                                <li><a class="dropdown-item @Active("/programs/training")" href="/programs/training">Training</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link @Active("/geographical-area")" href="/geographical-area">Geographical Area</a></li>
                         <li class="nav-item"><a class="nav-link @Active("/notice")" href="/notice">Notice</a></li>
                         @{
@@ -93,6 +110,7 @@
                     <div class="col-12 col-md-6 col-lg-3">
                         <h5 class="footer-heading">Important links</h5>
                         <ul class="list-unstyled footer-links mb-0">
+                            <li><a href="/career">Career</a></li>
                             <li><a href="https://mra.gov.bd/" target="_blank" rel="noopener">MRA</a></li>
                             <li><a href="https://pksf.org.bd/" target="_blank" rel="noopener">PKSF</a></li>
                             <li><a href="https://microfin360.com/" target="_blank" rel="noopener">Microfin360</a></li>

@@ -21,6 +21,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Experience> Experiences => Set<Experience>();
     public DbSet<AppreciativeStory> AppreciativeStories => Set<AppreciativeStory>();
     public DbSet<LegendaryVisitor> LegendaryVisitors => Set<LegendaryVisitor>();
+    public DbSet<ProgramItem> Programs => Set<ProgramItem>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -37,5 +38,6 @@ public class ApplicationDbContext : IdentityDbContext
         builder.Entity<Experience>().HasIndex(e => e.DisplayOrder);
         builder.Entity<AppreciativeStory>().HasIndex(s => s.DisplayOrder);
         builder.Entity<LegendaryVisitor>().HasIndex(v => v.DisplayOrder);
+        builder.Entity<ProgramItem>().HasIndex(p => new { p.Type, p.DisplayOrder });
     }
 }

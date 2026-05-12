@@ -1,0 +1,381 @@
+@page "/about/profile"
+@model Papri.Pages.About.ProfileModel
+@{
+    ViewData["Title"] = "Profile";
+
+    var coreValues = new[] {
+        "Transparency", "Accountability", "Participation", "Credibility", "Equality",
+        "Innovation", "Dynamism", "Professionalism", "Secular and democratic environment",
+        "Gender responsive"
+    };
+
+    var targetGroups = new[] {
+        "Poorest of the poor / Ultra-poor people",
+        "Persons with disabilities",
+        "Adolescent girls",
+        "Children",
+        "Women",
+        "Marginal farmers",
+        "Acid survivors and general people"
+    };
+
+    var objectives = new[] {
+        "Target people will be equipped with proper knowledge, awareness and skill to form groups and avail group-based services and family-based motivation so that they can struggle for their existence and sustainability.",
+        "Target people will have easy access to basic public services paving the way to the realization of their human rights so that they can survive and lead their lives with dignity in society.",
+        "Target people will obtain proper opportunities for micro-finance activities through their active participation so that they can be economically stable and socially dignified members of society.",
+        "Community people's participation will be ensured to mobilize local resources to implement integrated rural development."
+    };
+
+    var legal = new (string Authority, string Number, string Date)[] {
+        ("NGO Affairs Bureau, Bangladesh",                            "1424",                                  "16.09.1999"),
+        ("Joint Stock Companies & Firms, Bangladesh",                 "S-4156(258)/04",                        "06.10.2004"),
+        ("Micro Credit Regulatory Authority, Dhaka",                  "00571-00090-00107, MRA: 0000110",       "15.01.2008")
+    };
+
+    var coverage = new (string District, string Upazilas)[] {
+        ("Narsingdi",   "All 6 upazilas of Narsingdi"),
+        ("Mymensingh",  "Ishorgonj")
+    };
+}
+
+<section class="container-fluid px-3 px-lg-3 py-4">
+    <div class="mb-5 pb-2 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Organizational Profile</h1>
+        <p class="text-muted mb-0">An overview of PAPRI — who we are, what we do, and the people we work with.</p>
+    </div>
+
+    <!-- Org details table -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-3 p-md-4">
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle mb-0 profile-fact-table">
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="bg-light" style="width: 14rem;">Name of organization</th>
+                            <td>Poverty Alleviation through Participatory Rural Initiatives</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="bg-light">Abbreviated Name</th>
+                            <td>PAPRI</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="bg-light">Address</th>
+                            <td>
+                                <div class="mb-2">
+                                    <strong>Head office:</strong> Vill &amp; P.O — Narayanpur, Upazila: Belabo, District: Narsingdi.<br />
+                                    Mobile: 01711533610 &nbsp;|&nbsp; Email:
+                                    <a href="mailto:info@papri.org">info@papri.org</a> &nbsp;|&nbsp;
+                                    Website: <a href="https://www.papri.org" target="_blank" rel="noopener">www.papri.org</a>
+                                </div>
+                                <div class="mb-0">
+                                    <strong>Liaison office:</strong> 1/53, Court Road, Bilashdi, Narsingdi.<br />
+                                    Mobile: 01716031663, 01711533610 &nbsp;|&nbsp; Email:
+                                    <a href="mailto:pcreopa.papri@gmail.com">pcreopa.papri@gmail.com</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="bg-light">Contact person</th>
+                            <td>Abu Based, Executive Director</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="bg-light">Contact number</th>
+                            <td>01711-533610 &nbsp;|&nbsp; <a href="mailto:info@papri.org">info@papri.org</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="bg-light">Established</th>
+                            <td>July 1999</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="bg-light">Legal status</th>
+                            <td>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered align-middle mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th scope="col" style="width: 3rem;">SL</th>
+                                                <th scope="col">Registration authority</th>
+                                                <th scope="col">Registration no.</th>
+                                                <th scope="col" style="width: 8rem;">Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (var i = 0; i < legal.Length; i++)
+                                            {
+                                                <tr>
+                                                    <td>@(i + 1)</td>
+                                                    <td>@legal[i].Authority</td>
+                                                    <td>@legal[i].Number</td>
+                                                    <td>@legal[i].Date</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vision -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="h5 text-primary mb-3"><i class="bi bi-eye-fill me-2"></i>Vision</h2>
+            <p class="mb-0">
+                The vision of PAPRI is that target people will have socio-economic development with
+                capacity, empowerment and respect in society through mobilization of local
+                resources. They will act as development partners as a whole, so as to reflect peace
+                and harmony in society.
+            </p>
+        </div>
+    </div>
+
+    <!-- Mission -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="h5 text-primary mb-3"><i class="bi bi-compass-fill me-2"></i>Mission</h2>
+            <p class="mb-0">
+                PAPRI is forwarding to mobilize local resources to alleviate poverty and establish
+                a just, equitable and respectful life of the socially-distressed people. To have a
+                just society we are challenging poverty by mobilizing and utilizing local resources
+                to develop.
+            </p>
+        </div>
+    </div>
+
+    <!-- Goal -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="h5 text-primary mb-3"><i class="bi bi-bullseye me-2"></i>Goal</h2>
+            <p class="mb-0">
+                PAPRI believes in everyone's right to stand on their own feet — to enjoy
+                self-determination and self-reliance by achieving socio-economic development, and
+                considers <em>empowerment</em> of common people a dire necessity for improving their
+                life. Once the target people are empowered, they will be able to protect themselves
+                from all social adversities and improve their socio-economic condition by their own
+                initiatives and capacity-building through a participatory process, which also
+                contributes to the realization of their fundamental and social rights.
+            </p>
+        </div>
+    </div>
+
+    <!-- Major Objectives -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="h5 text-primary mb-3"><i class="bi bi-flag-fill me-2"></i>Major Objectives</h2>
+            <p class="mb-3">
+                PAPRI has the following four main objectives to attain the cause of overall rural
+                development:
+            </p>
+            <ol class="mb-0 ps-3">
+                @foreach (var obj in objectives)
+                {
+                    <li class="mb-2">@obj</li>
+                }
+            </ol>
+        </div>
+    </div>
+
+    <!-- Core Values -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="h5 text-primary mb-3"><i class="bi bi-stars me-2"></i>Core Values</h2>
+            <div class="row g-2">
+                @foreach (var v in coreValues)
+                {
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="d-flex align-items-start core-value-item">
+                            <i class="bi bi-check2-circle text-primary me-2 fs-5"></i>
+                            <span class="fw-medium">@v</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Target Groups -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="h5 text-primary mb-3"><i class="bi bi-people-fill me-2"></i>Target Groups</h2>
+            <ul class="list-group list-group-flush target-list">
+                @foreach (var g in targetGroups)
+                {
+                    <li class="list-group-item d-flex align-items-center">
+                        <i class="bi bi-dot text-primary fs-3 me-1"></i>
+                        <span class="fw-medium">@g</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <!-- Geographical Coverage -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="h5 text-primary mb-3"><i class="bi bi-geo-alt-fill me-2"></i>Geographical Coverage</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col" style="width: 14rem;">District</th>
+                            <th scope="col">Upazilas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var c in coverage)
+                        {
+                            <tr>
+                                <td class="fw-medium">@c.District</td>
+                                <td>@c.Upazilas</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donors / Partners -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4 p-md-5">
+            <h2 class="h5 text-primary mb-4"><i class="bi bi-people me-2"></i>Donors / Partners</h2>
+            <div class="row g-4">
+                <div class="col-12 col-lg-6">
+                    <h3 class="h6 fw-bold mb-3 text-success"><i class="bi bi-broadcast me-1"></i>Ongoing</h3>
+                    @if (Model.OngoingDonors.Count == 0)
+                    {
+                        <p class="text-muted mb-0">No ongoing donors listed.</p>
+                    }
+                    else
+                    {
+                        <ul class="list-group list-group-flush target-list">
+                            @foreach (var d in Model.OngoingDonors)
+                            {
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="bi bi-check2-circle text-success me-2 fs-5"></i>
+                                    <span class="fw-medium">@d.Name</span>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+                <div class="col-12 col-lg-6">
+                    <h3 class="h6 fw-bold mb-3 text-secondary"><i class="bi bi-clock-history me-1"></i>Previous</h3>
+                    @if (Model.PreviousDonors.Count == 0)
+                    {
+                        <p class="text-muted mb-0">No previous donors listed.</p>
+                    }
+                    else
+                    {
+                        <ul class="list-group list-group-flush target-list">
+                            @foreach (var d in Model.PreviousDonors)
+                            {
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="bi bi-archive text-secondary me-2 fs-5"></i>
+                                    <span class="fw-medium">@d.Name</span>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ongoing Programs -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-3 p-md-4">
+            <h2 class="h5 text-primary mb-3"><i class="bi bi-grid-3x3-gap-fill me-2"></i>Ongoing Programs</h2>
+            @if (Model.OngoingPrograms.Count == 0)
+            {
+                <p class="text-muted mb-0 text-center py-3">No ongoing programs to display.</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" style="width: 4rem;">SL</th>
+                                <th scope="col">Program Title</th>
+                                <th scope="col" style="min-width: 14rem;">Donors / Partner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.OngoingPrograms.Count; i++)
+                            {
+                                var p = Model.OngoingPrograms[i];
+                                <tr>
+                                    <td class="fw-semibold text-muted">@(i + 1)</td>
+                                    <td class="fw-medium">
+                                        <a href="/programs/@p.Id" class="text-decoration-none">@p.Title</a>
+                                    </td>
+                                    <td>@(string.IsNullOrWhiteSpace(p.DonorsPartner) ? "—" : p.DonorsPartner)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Implemented projects in last 5 years -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-3 p-md-4">
+            <h2 class="h5 text-primary mb-3"><i class="bi bi-clipboard-check me-2"></i>Implemented Projects of PAPRI</h2>
+            @if (Model.Experiences.Count == 0)
+            {
+                <p class="text-muted mb-0 text-center py-3">No implemented projects to display.</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" style="width: 4rem;">SL</th>
+                                <th scope="col" style="min-width: 14rem;">Project</th>
+                                <th scope="col" style="min-width: 12rem;">Donor / Partner</th>
+                                <th scope="col" style="min-width: 9rem;">Duration</th>
+                                <th scope="col" style="min-width: 18rem;">Activities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.Experiences.Count; i++)
+                            {
+                                var e = Model.Experiences[i];
+                                var acts = e.ActivityList().ToList();
+                                <tr>
+                                    <td class="fw-semibold text-muted">@(i + 1)</td>
+                                    <td class="fw-medium">@e.ProjectName</td>
+                                    <td>@(string.IsNullOrWhiteSpace(e.DonorPartner) ? "—" : e.DonorPartner)</td>
+                                    <td>@(string.IsNullOrWhiteSpace(e.Duration) ? "—" : e.Duration)</td>
+                                    <td>
+                                        @if (acts.Count == 0)
+                                        {
+                                            <span class="text-muted">—</span>
+                                        }
+                                        else
+                                        {
+                                            <ol class="mb-0 ps-3 small">
+                                                @foreach (var a in acts)
+                                                {
+                                                    <li>@a</li>
+                                                }
+                                            </ol>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</section>

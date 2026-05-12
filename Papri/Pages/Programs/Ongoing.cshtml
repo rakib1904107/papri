@@ -1,0 +1,14 @@
+@page "/programs/ongoing"
+@model Papri.Pages.Programs.OngoingModel
+@{
+    ViewData["Title"] = "Ongoing Programs / Projects";
+}
+
+<section class="container-fluid px-3 px-lg-3 py-4">
+    <div class="mb-5 pb-2 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Ongoing Programs / Projects</h1>
+        <p class="text-muted mb-0">Programs and projects PAPRI is currently running.</p>
+    </div>
+
+    <partial name="_ProgramCardList" model="Model.Items" />
+</section>

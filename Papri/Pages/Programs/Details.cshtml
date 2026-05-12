@@ -1,0 +1,93 @@
+@page "/programs/{id:int}"
+@model Papri.Pages.Programs.DetailsModel
+@{
+    ViewData["Title"] = Model.Item.Title;
+    var activities = Model.Item.ActivityList().ToList();
+    var objectives = Model.Item.ObjectiveList().ToList();
+    var backHref = Model.Item.Type == Papri.Models.ProgramType.Ongoing ? "/programs/ongoing" : "/programs/previous";
+    var backLabel = Model.Item.Type == Papri.Models.ProgramType.Ongoing ? "Ongoing Programs" : "Previous Programs";
+}
+
+<section class="container-fluid px-3 px-lg-3 py-4">
+    <div class="mb-3">
+        <a href="@backHref" class="text-decoration-none small text-muted">
+            <i class="bi bi-arrow-left me-1"></i>Back to @backLabel
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4 overflow-hidden">
+        @if (!string.IsNullOrWhiteSpace(Model.Item.ImagePath))
+        {
+            <div class="program-detail-image-wrap">
+                <img src="@Model.Item.ImagePath" alt="@Model.Item.Title" class="program-detail-image" />
+            </div>
+        }
+        <div class="card-body p-4 p-md-5">
+            <span class="badge bg-success-soft text-success mb-2">@(Model.Item.Type == Papri.Models.ProgramType.Ongoing ? "Ongoing" : "Previous")</span>
+            <h1 class="h3 fw-bold mb-3">@Model.Item.Title</h1>
+
+            <dl class="row mb-0 program-detail-meta">
+                @if (!string.IsNullOrWhiteSpace(Model.Item.DonorsPartner))
+                {
+                    <dt class="col-sm-4 col-lg-3">Donors / Partner</dt>
+                    <dd class="col-sm-8 col-lg-9">@Model.Item.DonorsPartner</dd>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Item.TargetPeople))
+                {
+                    <dt class="col-sm-4 col-lg-3">Target People</dt>
+                    <dd class="col-sm-8 col-lg-9">@Model.Item.TargetPeople</dd>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Item.WorkingArea))
+                {
+                    <dt class="col-sm-4 col-lg-3">Working Area</dt>
+                    <dd class="col-sm-8 col-lg-9">@Model.Item.WorkingArea</dd>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Item.Duration))
+                {
+                    <dt class="col-sm-4 col-lg-3">Duration</dt>
+                    <dd class="col-sm-8 col-lg-9">@Model.Item.Duration</dd>
+                }
+            </dl>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(Model.Item.Goal))
+    {
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="h5 text-primary mb-3"><i class="bi bi-bullseye me-2"></i>Goal</h2>
+                <p class="mb-0 program-detail-text">@Model.Item.Goal</p>
+            </div>
+        </div>
+    }
+
+    @if (objectives.Count > 0)
+    {
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="h5 text-primary mb-3"><i class="bi bi-flag me-2"></i>Objective</h2>
+                <ul class="mb-0 ps-3">
+                    @foreach (var obj in objectives)
+                    {
+                        <li class="mb-1">@obj</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+
+    @if (activities.Count > 0)
+    {
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="h5 text-primary mb-3"><i class="bi bi-list-check me-2"></i>Major Activities</h2>
+                <ul class="mb-0 ps-3">
+                    @foreach (var act in activities)
+                    {
+                        <li class="mb-1">@act</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+</section>

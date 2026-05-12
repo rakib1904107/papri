@@ -1,0 +1,80 @@
+@page "/admin/programs/create"
+@model Papri.Pages.Admin.Programs.CreateModel
+@{
+    ViewData["Title"] = "New Program";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-2"></div>
+            <div class="row g-3">
+                <div class="col-md-9">
+                    <label asp-for="Item.Title" class="form-label"></label>
+                    <input asp-for="Item.Title" class="form-control" />
+                    <span asp-validation-for="Item.Title" class="text-danger small"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Item.Type" class="form-label"></label>
+                    <select asp-for="Item.Type" asp-items="Html.GetEnumSelectList<ProgramType>()" class="form-select"></select>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="ImageFile" class="form-label">Image (jpg/png/webp, max 5 MB)</label>
+                    <input asp-for="ImageFile" type="file" accept="image/*" class="form-control" />
+                    <span asp-validation-for="ImageFile" class="text-danger small"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Item.DonorsPartner" class="form-label"></label>
+                    <input asp-for="Item.DonorsPartner" class="form-control" placeholder="e.g. SHAPLA NEER, DFID; GoB-UNICEF" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Item.Duration" class="form-label"></label>
+                    <input asp-for="Item.Duration" class="form-control" placeholder="e.g. Apr 2009 – Mar 2012" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Item.TargetPeople" class="form-label"></label>
+                    <input asp-for="Item.TargetPeople" class="form-control" placeholder="e.g. Adolescent girls, poor families" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Item.WorkingArea" class="form-label"></label>
+                    <input asp-for="Item.WorkingArea" class="form-control" placeholder="e.g. Belabo, Raipura, Narsingdi" />
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Item.Goal" class="form-label"></label>
+                    <textarea asp-for="Item.Goal" class="form-control" rows="3"></textarea>
+                    <div class="form-text">First two lines are shown on the program card preview.</div>
+                </div>
+                <div class="col-12">
+                    <label asp-for="Item.Objective" class="form-label"></label>
+                    <textarea asp-for="Item.Objective" class="form-control" rows="5" placeholder="One objective per line."></textarea>
+                    <div class="form-text">Each line becomes a bullet point on the details page.</div>
+                </div>
+                <div class="col-12">
+                    <label asp-for="Item.MajorActivities" class="form-label"></label>
+                    <textarea asp-for="Item.MajorActivities" class="form-control" rows="6" placeholder="One activity per line."></textarea>
+                    <div class="form-text">Each line becomes a numbered list item on the details page.</div>
+                </div>
+
+                <div class="col-md-3">
+                    <label asp-for="Item.DisplayOrder" class="form-label"></label>
+                    <input asp-for="Item.DisplayOrder" type="number" class="form-control" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <div class="form-check">
+                        <input asp-for="Item.IsActive" class="form-check-input" />
+                        <label asp-for="Item.IsActive" class="form-check-label">Active</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save</button>
+                <a href="/admin/programs" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
