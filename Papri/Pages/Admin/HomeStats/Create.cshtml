@@ -1,0 +1,46 @@
+@page "/admin/home-stats/create"
+@model Papri.Pages.Admin.HomeStats.CreateModel
+@{
+    ViewData["Title"] = "New Stat";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-2"></div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label asp-for="Item.Value" class="form-label"></label>
+                    <input asp-for="Item.Value" class="form-control" placeholder="e.g. 50,000+ or 03+" />
+                    <span asp-validation-for="Item.Value" class="text-danger small"></span>
+                </div>
+                <div class="col-md-8">
+                    <label asp-for="Item.Label" class="form-label"></label>
+                    <input asp-for="Item.Label" class="form-control" placeholder="e.g. People Reached" />
+                    <span asp-validation-for="Item.Label" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Item.Icon" class="form-label">Bootstrap Icon (class name)</label>
+                    <input asp-for="Item.Icon" class="form-control" placeholder="e.g. bi-people-fill" />
+                    <div class="form-text">See <a href="https://icons.getbootstrap.com/" target="_blank" rel="noopener">icons.getbootstrap.com</a> &mdash; copy the class name (without 'bi-' prefix works too).</div>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Item.DisplayOrder" class="form-label"></label>
+                    <input asp-for="Item.DisplayOrder" type="number" class="form-control" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <div class="form-check">
+                        <input asp-for="Item.IsActive" class="form-check-input" />
+                        <label asp-for="Item.IsActive" class="form-check-label">Active</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save</button>
+                <a href="/admin/home-stats" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

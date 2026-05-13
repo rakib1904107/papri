@@ -40,6 +40,7 @@ public class EditModel : PageModel
         entity.Title = Item.Title;
         entity.Details = Item.Details;
         entity.Date = Item.Date;
+        entity.IsActive = Item.IsActive;
 
         if (ImageFile is { Length: > 0 })
         {

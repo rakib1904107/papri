@@ -1,0 +1,46 @@
+@page "/admin/home-stats/edit/{id:int}"
+@model Papri.Pages.Admin.HomeStats.EditModel
+@{
+    ViewData["Title"] = "Edit Stat";
+}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" novalidate>
+            <div asp-validation-summary="ModelOnly" class="text-danger small mb-2"></div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label asp-for="Item.Value" class="form-label"></label>
+                    <input asp-for="Item.Value" class="form-control" />
+                    <span asp-validation-for="Item.Value" class="text-danger small"></span>
+                </div>
+                <div class="col-md-8">
+                    <label asp-for="Item.Label" class="form-label"></label>
+                    <input asp-for="Item.Label" class="form-control" />
+                    <span asp-validation-for="Item.Label" class="text-danger small"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Item.Icon" class="form-label">Bootstrap Icon (class name)</label>
+                    <input asp-for="Item.Icon" class="form-control" />
+                    <div class="form-text">e.g. bi-people-fill</div>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Item.DisplayOrder" class="form-label"></label>
+                    <input asp-for="Item.DisplayOrder" type="number" class="form-control" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <div class="form-check">
+                        <input asp-for="Item.IsActive" class="form-check-input" />
+                        <label asp-for="Item.IsActive" class="form-check-label">Active</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Update</button>
+                <a href="/admin/home-stats" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

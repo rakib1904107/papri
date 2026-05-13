@@ -22,6 +22,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<AppreciativeStory> AppreciativeStories => Set<AppreciativeStory>();
     public DbSet<LegendaryVisitor> LegendaryVisitors => Set<LegendaryVisitor>();
     public DbSet<ProgramItem> Programs => Set<ProgramItem>();
+    public DbSet<HomeStat> HomeStats => Set<HomeStat>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -39,5 +40,6 @@ public class ApplicationDbContext : IdentityDbContext
         builder.Entity<AppreciativeStory>().HasIndex(s => s.DisplayOrder);
         builder.Entity<LegendaryVisitor>().HasIndex(v => v.DisplayOrder);
         builder.Entity<ProgramItem>().HasIndex(p => new { p.Type, p.DisplayOrder });
+        builder.Entity<HomeStat>().HasIndex(s => s.DisplayOrder);
     }
 }

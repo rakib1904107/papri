@@ -1,0 +1,29 @@
+@page "/projects/{id:int}"
+@model Papri.Pages.Projects.DetailsModel
+@{
+    ViewData["Title"] = Model.Item.Title;
+}
+
+<section class="container-fluid px-3 px-lg-3 py-4">
+    <div class="mb-3">
+        <a href="/projects" class="text-decoration-none small text-muted">
+            <i class="bi bi-arrow-left me-1"></i>Back to Projects
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0 mb-4 overflow-hidden">
+        @if (!string.IsNullOrWhiteSpace(Model.Item.ImagePath))
+        {
+            <div class="project-detail-image-wrap">
+                <img src="@Model.Item.ImagePath" alt="@Model.Item.Title" class="project-detail-image" />
+            </div>
+        }
+        <div class="card-body p-4 p-md-5">
+            <h1 class="h3 fw-bold mb-2">@Model.Item.Title</h1>
+            <p class="text-muted mb-4 small">
+                <i class="bi bi-calendar3 me-1"></i>@Model.Item.Date.ToString("dd MMM yyyy")
+            </p>
+            <div class="project-detail-text">@Model.Item.Details</div>
+        </div>
+    </div>
+</section>

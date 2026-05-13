@@ -538,3 +538,319 @@ body.public-body { margin-bottom: 0; }
 }
 .contact-list a:hover { color: #4f6ef7; }
 
+/* ============================================================
+   HOME PAGE
+   ============================================================ */
+
+.home-page {
+    background: #eef3ff;
+}
+
+body:has(.home-page),
+body:has(.home-page) .public-main {
+    background: #eef3ff;
+}
+
+/* -------- Hero (full-width slider + overlay text) -------- */
+.home-hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.home-hero-carousel,
+.home-hero-carousel .carousel-inner,
+.home-hero-carousel .carousel-item {
+    height: 540px;
+}
+
+.home-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.home-hero-fallback {
+    height: 540px;
+    background: #e7eaf3;
+    color: #c4c9d4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.home-hero-control {
+    width: 6%;
+    opacity: 0.9;
+    z-index: 3;
+}
+.home-hero-control .carousel-control-prev-icon,
+.home-hero-control .carousel-control-next-icon {
+    background-color: rgba(31, 42, 68, 0.55);
+    border-radius: 50%;
+    padding: 1rem;
+    background-size: 50% 50%;
+}
+
+.home-hero-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    z-index: 2;
+}
+.home-hero-overlay .container-fluid {
+    width: 100%;
+}
+.home-hero-overlay .home-hero-card {
+    padding-left: 2%;
+}
+@media (min-width: 992px) {
+    .home-hero-overlay .home-hero-card {
+        padding-left: 3%;
+    }
+}
+
+.home-hero-card {
+    max-width: 760px;
+    padding: 0;
+    background: transparent;
+    pointer-events: auto;
+}
+
+.home-hero-title {
+    font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+}
+
+.home-hero-sub {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: #f0f3fa;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+}
+
+.home-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.home-hero-btn-primary {
+    background: #4f6ef7;
+    color: #ffffff;
+    border: none;
+    padding: 0.55rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+.home-hero-btn-primary:hover {
+    background: #3b58d8;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.home-hero-btn-secondary {
+    background: #ffffff;
+    color: #1f2a44;
+    border: 1px solid #c5cee0;
+    padding: 0.55rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+.home-hero-btn-secondary:hover {
+    background: #4f6ef7;
+    color: #ffffff;
+    border-color: #4f6ef7;
+}
+
+@media (max-width: 767.98px) {
+    .home-hero-carousel,
+    .home-hero-carousel .carousel-inner,
+    .home-hero-carousel .carousel-item,
+    .home-hero-fallback {
+        height: 380px;
+    }
+    .home-hero-card {
+        padding: 1.25rem 1.25rem;
+    }
+}
+
+/* -------- About section (no cards) -------- */
+.home-about-text {
+    font-size: 1rem;
+    line-height: 1.65;
+    max-width: 620px;
+}
+
+.home-about-image {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+}
+
+/* -------- Stats (white panel, larger numbers, static icons) -------- */
+.home-stats-panel {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.75rem 1.5rem;
+}
+
+.home-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.home-stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: #dce5ff;
+    color: #4f6ef7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.home-stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1f2a44;
+    line-height: 1.05;
+}
+
+.home-stat-label {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-top: 0.2rem;
+}
+
+@media (max-width: 575.98px) {
+    .home-stat-value { font-size: 1.6rem; }
+}
+
+/* -------- View All button -------- */
+.home-view-all-btn {
+    background: transparent;
+    color: #4f6ef7;
+    border: 1px solid #4f6ef7;
+    padding: 0.5rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.home-view-all-btn:hover {
+    background: #4f6ef7;
+    color: #ffffff;
+}
+
+/* -------- Ongoing Projects card -------- */
+.home-project-card {
+    border-radius: 14px;
+}
+
+.home-project-body {
+    padding-top: 1rem !important;
+}
+
+.home-project-image-frame {
+    padding: 1rem;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+}
+
+.home-project-image {
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    max-height: 340px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.home-project-image-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    background: #f1f3f8;
+    color: #c4c9d4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border-radius: 10px;
+}
+
+.home-project-details {
+    white-space: pre-line;
+    line-height: 1.55;
+}
+
+/* -------- Public Projects pages -------- */
+.project-card-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.project-card-image-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #f1f3f8;
+    color: #c4c9d4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.project-card-preview {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project-detail-image-wrap {
+    width: 100%;
+    background: #f1f3f8;
+}
+
+.project-detail-image {
+    display: block;
+    width: 100%;
+    max-height: 520px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.project-detail-text {
+    white-space: pre-line;
+    line-height: 1.65;
+    color: #4a5568;
+}
+

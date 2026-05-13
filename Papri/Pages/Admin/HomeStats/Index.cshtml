@@ -1,12 +1,10 @@
-@page "/admin/projects"
-@model Papri.Pages.Admin.Projects.IndexModel
+@page "/admin/home-stats"
+@model Papri.Pages.Admin.HomeStats.IndexModel
 @{
-    ViewData["Title"] = "Projects";
-    ViewData["SearchPlaceholder"] = "Search projects...";
-    ViewData["NewButtonText"] = "New Project";
-    ViewData["NewButtonHref"] = "/admin/projects/create";
-    var currentQ = HttpContext.Request.Query["q"].ToString();
-    var currentPage = HttpContext.Request.Query["page"].ToString();
+    ViewData["Title"] = "Home Stats";
+    ViewData["SearchPlaceholder"] = "Search stats...";
+    ViewData["NewButtonText"] = "New Stat";
+    ViewData["NewButtonHref"] = "/admin/home-stats/create";
 }
 
 @if (!string.IsNullOrEmpty(Model.StatusMessage))
@@ -21,34 +19,37 @@
             <table class="table align-middle">
                 <thead class="table-light">
                     <tr>
-                        <th style="width: 60px;">Id</th>
-                        <th style="width: 90px;">Image</th>
-                        <th style="width: 120px;">Date</th>
-                        <th>Title</th>
-                        <th>Details</th>
+                        <th style="width: 70px;">Id</th>
+                        <th style="width: 80px;">Icon</th>
+                        <th style="min-width: 14rem;">Label</th>
+                        <th style="width: 10rem;">Value</th>
+                        <th style="width: 80px;">Order</th>
                         <th style="width: 100px;">Status</th>
-                        <th style="width: 130px;" class="text-end">Action</th>
+                        <th style="width: 160px;" class="text-end">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (!Model.Items.Any())
                     {
-                        <tr><td colspan="7" class="text-center text-muted py-4">No projects yet.</td></tr>
+                        <tr><td colspan="7" class="text-center text-muted py-4">No stats yet.</td></tr>
                     }
                     @foreach (var item in Model.Items)
                     {
                         <tr>
                             <td>@item.Id</td>
                             <td>
-                                @if (!string.IsNullOrEmpty(item.ImagePath))
+                                @if (!string.IsNullOrWhiteSpace(item.Icon))
                                 {
-                                    <img src="@item.ImagePath" class="img-thumbnail" style="width:64px;height:48px;object-fit:cover;" />
+                                    <i class="bi @item.Icon" style="font-size: 1.25rem;"></i>
                                 }
-                                else { <span class="text-muted small">—</span> }
+                                else
+                                {
+                                    <span class="text-muted small">—</span>
+                                }
                             </td>
-                            <td>@item.Date.ToString("yyyy-MM-dd")</td>
-                            <td>@item.Title</td>
-                            <td class="text-truncate" style="max-width: 280px;">@item.Details</td>
+                            <td class="fw-medium">@item.Label</td>
+                            <td class="fw-bold">@item.Value</td>
+                            <td>@item.DisplayOrder</td>
                             <td>
                                 @if (item.IsActive)
                                 {
@@ -60,8 +61,8 @@
                                 }
                             </td>
                             <td class="text-end">
-                                <a class="btn btn-sm btn-outline-primary" href="/admin/projects/edit/@item.Id"><i class="bi bi-pencil"></i></a>
-                                <form method="post" action="/admin/projects?handler=Delete&id=@item.Id" class="d-inline" onsubmit="return confirm('Delete this project?');">
+                                <a class="btn btn-sm btn-outline-primary" href="/admin/home-stats/edit/@item.Id"><i class="bi bi-pencil"></i></a>
+                                <form method="post" action="/admin/home-stats?handler=Delete&id=@item.Id" class="d-inline" onsubmit="return confirm('Delete this stat?');">
                                     @Html.AntiForgeryToken()
                                     <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                                 </form>

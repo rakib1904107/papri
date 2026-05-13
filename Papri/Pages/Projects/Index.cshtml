@@ -1,0 +1,51 @@
+@page "/projects"
+@model Papri.Pages.Projects.IndexModel
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<section class="container-fluid px-3 px-lg-3 py-4">
+    <div class="mb-5 pb-2 text-center">
+        <h1 class="h3 mb-1 text-uppercase">Our Projects</h1>
+        <p class="text-muted mb-0">Initiatives and projects implemented by PAPRI.</p>
+    </div>
+
+    @if (Model.Items.Count == 0)
+    {
+        <div class="card shadow-sm border-0">
+            <div class="card-body text-center text-muted py-5">No projects to display yet.</div>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var p in Model.Items)
+            {
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0 project-card">
+                        @if (!string.IsNullOrWhiteSpace(p.ImagePath))
+                        {
+                            <img src="@p.ImagePath" alt="@p.Title" class="project-card-image" />
+                        }
+                        else
+                        {
+                            <div class="project-card-image-placeholder">
+                                <i class="bi bi-image"></i>
+                            </div>
+                        }
+                        <div class="card-body d-flex flex-column text-start">
+                            <h2 class="h6 mb-2 fw-bold">@p.Title</h2>
+                            <p class="project-card-date small text-muted mb-2">
+                                <i class="bi bi-calendar3 me-1"></i>@p.Date.ToString("dd MMM yyyy")
+                            </p>
+                            <p class="project-card-preview text-muted small mb-3">@p.Details</p>
+                            <a href="/projects/@p.Id" class="btn btn-sm learn-more-btn mt-auto mx-auto">
+                                View Project <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</section>

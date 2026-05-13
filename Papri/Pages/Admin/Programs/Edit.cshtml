@@ -36,9 +36,16 @@
                     <label asp-for="Item.DonorsPartner" class="form-label"></label>
                     <input asp-for="Item.DonorsPartner" class="form-control" />
                 </div>
-                <div class="col-md-6">
-                    <label asp-for="Item.Duration" class="form-label"></label>
-                    <input asp-for="Item.Duration" class="form-control" />
+                <div class="col-md-3">
+                    <label asp-for="StartMonthInput" class="form-label">Start (Month / Year)</label>
+                    <input asp-for="StartMonthInput" type="month" class="form-control" required />
+                    <span asp-validation-for="StartMonthInput" class="text-danger small"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="EndMonthInput" class="form-label">End (Month / Year)</label>
+                    <input asp-for="EndMonthInput" type="month" class="form-control" />
+                    <div class="form-text">Leave blank for ongoing programs.</div>
+                    <span asp-validation-for="EndMonthInput" class="text-danger small"></span>
                 </div>
                 <div class="col-md-6">
                     <label asp-for="Item.TargetPeople" class="form-label"></label>

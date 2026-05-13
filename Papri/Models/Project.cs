@@ -20,4 +20,7 @@ public class Project
     [DataType(DataType.Date)]
     [Display(Name = "Date")]
     public DateTime Date { get; set; } = DateTime.UtcNow;
+
+    [Display(Name = "Active")]
+    public bool IsActive { get; set; } = true;
 }

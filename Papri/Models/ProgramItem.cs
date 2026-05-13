@@ -33,9 +33,11 @@ public class ProgramItem
     [Display(Name = "Working Area")]
     public string? WorkingArea { get; set; }
 
-    [StringLength(100)]
-    [Display(Name = "Duration")]
-    public string? Duration { get; set; }
+    [Display(Name = "Start (Month / Year)")]
+    public DateOnly StartDate { get; set; }
+
+    [Display(Name = "End (Month / Year)")]
+    public DateOnly? EndDate { get; set; }
 
     [Display(Name = "Goal")]
     public string? Goal { get; set; }
