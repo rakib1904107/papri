@@ -854,3 +854,49 @@ body:has(.home-page) .public-main {
     color: #4a5568;
 }
 
+.project-learn-more-btn {
+    background: var(--bs-primary, #0d6efd);
+    color: #fff;
+    border: 1px solid var(--bs-primary, #0d6efd);
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.project-learn-more-btn:hover {
+    background: transparent;
+    color: var(--bs-primary, #0d6efd);
+    border: 1px solid var(--bs-primary, #0d6efd);
+}
+
+/* ===================== Scroll-triggered animations ===================== */
+.anim-from-left,
+.anim-from-right,
+.anim-from-bottom {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.anim-from-left { transform: translateX(-160px); }
+.anim-from-right { transform: translateX(160px); }
+.anim-from-bottom { transform: translateY(120px); }
+
+
+.anim-visible {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.anim-stagger > *:nth-child(1) { transition-delay: 0s; }
+.anim-stagger > *:nth-child(2) { transition-delay: 0.07s; }
+.anim-stagger > *:nth-child(3) { transition-delay: 0.14s; }
+.anim-stagger > *:nth-child(4) { transition-delay: 0.21s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .anim-from-left,
+    .anim-from-right,
+    .anim-from-bottom {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

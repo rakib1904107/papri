@@ -27,7 +27,6 @@ public class EditModel : PageModel
         if (entity is null) return NotFound();
         entity.Label = Item.Label;
         entity.Value = Item.Value;
-        entity.Icon = Item.Icon;
         entity.DisplayOrder = Item.DisplayOrder;
         entity.IsActive = Item.IsActive;
         await _db.SaveChangesAsync();

@@ -16,10 +16,6 @@ public class HomeStat
     [Display(Name = "Value")]
     public string Value { get; set; } = string.Empty;
 
-    [StringLength(50)]
-    [Display(Name = "Bootstrap Icon")]
-    public string? Icon { get; set; }
-
     [Display(Name = "Display Order")]
     public int DisplayOrder { get; set; }
 

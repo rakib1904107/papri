@@ -20,15 +20,10 @@
                     <span asp-validation-for="Item.Label" class="text-danger small"></span>
                 </div>
                 <div class="col-md-6">
-                    <label asp-for="Item.Icon" class="form-label">Bootstrap Icon (class name)</label>
-                    <input asp-for="Item.Icon" class="form-control" />
-                    <div class="form-text">e.g. bi-people-fill</div>
-                </div>
-                <div class="col-md-3">
                     <label asp-for="Item.DisplayOrder" class="form-label"></label>
                     <input asp-for="Item.DisplayOrder" type="number" class="form-control" />
                 </div>
-                <div class="col-md-3 d-flex align-items-end">
+                <div class="col-md-6 d-flex align-items-end">
                     <div class="form-check">
                         <input asp-for="Item.IsActive" class="form-check-input" />
                         <label asp-for="Item.IsActive" class="form-check-label">Active</label>

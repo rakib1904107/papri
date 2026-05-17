@@ -56,7 +56,7 @@
     <!-- ===================== 2. ABOUT PAPRI ===================== -->
     <section class="container-fluid px-3 px-lg-5 py-5">
         <div class="row g-4 align-items-center">
-            <div class="col-lg-7">
+            <div class="col-lg-7 anim-from-left">
                 <h2 class="h3 fw-bold mb-3">About PAPRI</h2>
                 <p class="text-muted mb-4 home-about-text">
                     PAPRI is a non-government voluntary development organization established in 1999,
@@ -65,7 +65,7 @@
                 </p>
                 <a href="/about/profile" class="btn home-hero-btn-primary">Read More <i class="bi bi-arrow-right ms-1"></i></a>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-5 anim-from-right">
                 <img src="~/images/about-side.jpg" alt="About PAPRI" class="img-fluid rounded home-about-image"
                      onerror="this.style.display='none'" />
             </div>
@@ -77,12 +77,12 @@
     {
         <section class="container-fluid px-3 px-lg-5 pb-5">
             <div class="home-stats-panel">
-                <div class="row g-4">
+                <div class="row g-4 anim-stagger">
                     @for (var i = 0; i < Model.Stats.Count; i++)
                     {
                         var stat = Model.Stats[i];
                         var icon = i < statIcons.Length ? statIcons[i] : "bi-graph-up";
-                        <div class="col-6 col-md-3">
+                        <div class="col-6 col-md-3 anim-from-bottom">
                             <div class="home-stat">
                                 <div class="home-stat-icon">
                                     <i class="bi @icon"></i>
@@ -104,11 +104,11 @@
     {
         <section class="container-fluid px-3 px-lg-5 pb-5">
             <h2 class="h3 fw-bold mb-4">Our Impact</h2>
-            <div class="row g-4">
+            <div class="row g-4 anim-stagger">
                 @foreach (var p in Model.ImpactPrograms)
                 {
                     var preview = p.Goal ?? p.Objective ?? "";
-                    <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="col-12 col-sm-6 col-lg-3 anim-from-bottom">
                         <div class="card h-100 shadow-sm border-0 program-card">
                             @if (!string.IsNullOrWhiteSpace(p.ImagePath))
                             {
@@ -145,7 +145,7 @@
             <h2 class="h3 fw-bold mb-4">Ongoing Projects</h2>
             <div class="card shadow-sm border-0 overflow-hidden home-project-card">
                 <div class="row g-0 align-items-stretch">
-                    <div class="col-md-4">
+                    <div class="col-md-4 anim-from-left">
                         <div class="home-project-image-frame">
                             @if (!string.IsNullOrWhiteSpace(proj.ImagePath))
                             {
@@ -159,7 +159,7 @@
                             }
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 anim-from-right">
                         <div class="card-body p-4 p-md-4 d-flex flex-column h-100 home-project-body">
                             <h3 class="h4 fw-bold mb-2">@proj.Title</h3>
                             <p class="text-muted mb-2 small"><i class="bi bi-calendar3 me-1"></i>@proj.Date.ToString("dd MMM yyyy")</p>
@@ -175,3 +175,28 @@
     }
 
 </div>
+
+@section Scripts {
+    <script>
+        (function () {
+            var targets = document.querySelectorAll('.anim-from-left, .anim-from-right, .anim-from-bottom');
+            if (!targets.length) return;
+
+            if (!('IntersectionObserver' in window)) {
+                targets.forEach(function (el) { el.classList.add('anim-visible'); });
+                return;
+            }
+
+            var io = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('anim-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+            targets.forEach(function (el) { io.observe(el); });
+        })();
+    </script>
+}
